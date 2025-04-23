@@ -1,0 +1,90 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SoftwareProjectManager.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="1280"
+        Height="720"
+        x:Class="SoftwareProjectManager.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/SPM icon.ico"
+        Title="Software Project Manager"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Border>
+        <StackPanel Margin = "20">
+            <Panel>
+                <!-- Handles all elements above the horizontal line (separator) at the top of the screen -->    
+                <TextBlock Text="Software Project Manager" FontFamily="{StaticResource Nunito}" HorizontalAlignment="Left" 
+                           VerticalAlignment="Top" FontSize="24"/>
+                <Image Source="/Assets/anonPFP.png" Margin = "80 -20" Height = "51" Width="51" HorizontalAlignment="Right"/>
+                <Button Content="Log Out" VerticalAlignment="Top" HorizontalAlignment="Right" FontFamily="{StaticResource Nunito}"
+                    Background="DarkBlue" CornerRadius="45 20 45 20" Command="{Binding LogOut}"/>
+            </Panel>
+            <Separator Margin="10"/>
+            <Panel Margin = "240 80 320 0">
+                <!-- Panel handles the Welcome Message and project display: grouped 
+                based on their vertical positions on screen -->
+                <Image Source = "/Assets/anonPFP.png" Height = "40" Width = "40" Margin = " -50 -20" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding UserName, StringFormat='Welcome, {0}!'}"
+                           FontFamily="{StaticResource Nunito}" FontSize="24"/>
+                <TextBlock Text="Projects:" FontFamily="{StaticResource Nunito}" FontSize="24"
+                           HorizontalAlignment="Right"/>
+                <Button Content="+" HorizontalAlignment="Right" Margin = "0 0 -250 0" MaxWidth="27"
+                        Command="{Binding EnableProjectCommand}"/>
+            </Panel>
+            <Panel HorizontalAlignment="Left" Margin="825 0 0 0">
+                <!-- Create the Data Grid for the Projects -->
+                <DataGrid x:Name="DataGrid" ItemsSource="{Binding _userProjects}"
+                          IsReadOnly="True"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserSortColumns="True"
+                          GridLinesVisibility="All"
+                          BorderThickness="10" BorderBrush="Transparent"
+                          Background="Transparent"
+                          MaxWidth="400"
+                          MaxHeight="400"
+                          FontSize="12">
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="View"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--
+                        <DataGridTextColumn Header="Title"  Binding="{Binding title}"
+                                            FontSize="12"/>
+                        <DataGridTextColumn Header="Language" Binding="{Binding language}" />
+                        -->
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Panel>
+            <Panel Margin = "0 0 280 0">
+                <TextBox Watermark="Project Name... " Text="{Binding NewProjectName}" IsEnabled="{Binding IsAddingProject}"
+                         HorizontalAlignment="Right" MaxWidth="125" MinWidth="125"/>
+                <Button Content="Add" HorizontalAlignment="Right" Margin="0 0 -210 0" MaxWidth="50"
+                        IsEnabled="{Binding IsAddingProject}" Command="{Binding AddProjectCommand}"/>
+            </Panel>
+            
+        </StackPanel>
+        
+        
+
+    </Border>
+
+</Window>
