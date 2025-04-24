@@ -56,7 +56,14 @@ public class MainWindowViewModel : ViewModelBase
 
         foreach (string project in projectNames)
         {
-            _userProjects.Add(project);
+            try
+            {
+                _userProjects.Add(project);
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
         
         AddProjectCommand = ReactiveCommand.CreateFromTask(async () =>

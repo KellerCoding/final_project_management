@@ -64,6 +64,8 @@ public class AddProjectViewModel : ViewModelBase
                         ErrorMessage = "";
                         
                         Project newProject = new Project(idConversion, ProjectName, ProjectDescription);
+                        // Place this line above the closing code.
+                        user.AddProject(newProject);
                         
                         var mainWindow =
                             (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
@@ -78,8 +80,7 @@ public class AddProjectViewModel : ViewModelBase
                             desktop.MainWindow = mainWindow;
                         }
                         
-                        // Place this line above the closing code.
-                        user.AddProject(newProject);
+                        
 
                         
                     }
