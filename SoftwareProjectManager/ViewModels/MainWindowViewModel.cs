@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive;
@@ -25,128 +26,54 @@ public class MainWindowViewModel : ViewModelBase
         set => _userName = value;
     }
 
-    private string? _newProjectName;
-    public string? NewProjectName { get => _newProjectName; set => _newProjectName = value; }
+    public OrgUser user;
     
-    public bool _isAddingProject;
-    public bool IsAddingProject { get => _isAddingProject; private set => this.RaiseAndSetIfChanged(ref _isAddingProject, value); }
     
-    public ObservableCollection<Project>? _userProjects { get; private set; }
+    
+    public ObservableCollection<string>? _userProjects { get; private set; }
 
-    
-    
+
+
     public MainWindowViewModel()
     {
-        _userName = "User";
-        
-        UserName = _userName;
+        // Default Required
+    }
+    public MainWindowViewModel(OrgUser user)
+    {
+        this.user = user;
+        UserName = user.GetUsername();
+        ArrayList projectNames = new ArrayList();
 
-        var userProjects = new List<Project>
+        try
         {
-            /* Delete this, keeping for reference
-             
-            new Project("Software Project Manager \n", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            new Project("Software Project Manager", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            new Project("Software Project Manager", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            new Project("Software Project Manager", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            new Project("Software Project Manager \n", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            new Project("Software Project Manager", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            new Project("Software Project Manager", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            new Project("Software Project Manager", "XAXML"),
-            new Project("Operating Systems", "C#"),
-            */
-        };
-        _userProjects = new ObservableCollection<Project>(userProjects);
-
-
-        EnableProjectCommand = ReactiveCommand.Create(() =>
+            projectNames = user.ViewProjects();
+        }
+        catch (Exception e)
         {
-            IsAddingProject = true;
-        });
+            
+        }
+
+        foreach (string project in projectNames)
+        {
+            _userProjects.Add(project);
+        }
         
         AddProjectCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            // Include Project
-            IsAddingProject = false;
-            //_userProjects.Add(new Project(NewProjectName, "XAXML"));
-        });
-        
-        LogOut = ReactiveCommand.Create(() =>
-        {
-            /*
-            Console.WriteLine("LogOut successful");
-            var window = new LoginWindow();
-            window.Show();
-                
-            var mainWindow = (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-            if (mainWindow != null)
-            {
-                Console.WriteLine(mainWindow.Title);
-                mainWindow.Close();
-            }
-            */
-            
-            var mainWindow = (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-            if (mainWindow != null)
-            {
-                Console.WriteLine(mainWindow.Title);
-                mainWindow.Hide();
-            }
-
-                
             if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new LoginWindow()
+                desktop.MainWindow = new AddProjectWindow()
                 {
-                    DataContext = new LoginWindowViewModel()
+                    DataContext = new AddProjectViewModel(this.user)
                 };
-                    
+
                 desktop.MainWindow.Show();
             }
-        });
-    }
-    
-    public MainWindowViewModel(string _userName)
-    {
-        UserName = _userName;
-
-        var userProjects = new List<Project>
-        {
-            // See default constructor
-        };
-        _userProjects = new ObservableCollection<Project>(userProjects);
-        
-        AddProjectCommand = ReactiveCommand.CreateFromTask(async () =>
-        {
-            var newWindow = new LoginWindow();
-            var mainWindow = (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-            
-            await newWindow.ShowDialog(mainWindow);
             
         });
         
         LogOut = ReactiveCommand.Create(() =>
         {
-            /*
-            Console.WriteLine("LogOut successful");
-            var window = new LoginWindow();
-            window.Show();
-
-            var mainWindow = (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-            if (mainWindow != null)
-            {
-                Console.WriteLine(mainWindow.Title);
-                mainWindow.Close();
-            }
-            */
-            
             var mainWindow = (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
             if (mainWindow != null)
             {

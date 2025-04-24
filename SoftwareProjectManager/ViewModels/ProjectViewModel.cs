@@ -7,6 +7,4 @@ public class ProjectViewModel
 {
     Project _project;
     public Project Project { get; }
-
-
 }

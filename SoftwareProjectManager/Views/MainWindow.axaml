@@ -41,7 +41,7 @@
                 <TextBlock Text="Projects:" FontFamily="{StaticResource Nunito}" FontSize="24"
                            HorizontalAlignment="Right"/>
                 <Button Content="+" HorizontalAlignment="Right" Margin = "0 0 -250 0" MaxWidth="27"
-                        Command="{Binding EnableProjectCommand}"/>
+                        Command="{Binding AddProjectCommand}"/>
             </Panel>
             <Panel HorizontalAlignment="Left" Margin="825 0 0 0">
                 <!-- Create the Data Grid for the Projects -->
@@ -65,20 +65,12 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--
-                        <DataGridTextColumn Header="Title"  Binding="{Binding title}"
+                        
+                        <DataGridTextColumn Header="Title"  Binding="{Binding}"
                                             FontSize="12"/>
-                        <DataGridTextColumn Header="Language" Binding="{Binding language}" />
-                        -->
                         
                     </DataGrid.Columns>
                 </DataGrid>
-            </Panel>
-            <Panel Margin = "0 0 280 0">
-                <TextBox Watermark="Project Name... " Text="{Binding NewProjectName}" IsEnabled="{Binding IsAddingProject}"
-                         HorizontalAlignment="Right" MaxWidth="125" MinWidth="125"/>
-                <Button Content="Add" HorizontalAlignment="Right" Margin="0 0 -210 0" MaxWidth="50"
-                        IsEnabled="{Binding IsAddingProject}" Command="{Binding AddProjectCommand}"/>
             </Panel>
             
         </StackPanel>
