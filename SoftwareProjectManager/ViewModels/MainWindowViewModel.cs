@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using System.Xml;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using ReactiveUI;
 using SoftwareProjectManager.Views;
@@ -60,16 +61,32 @@ public class MainWindowViewModel : ViewModelBase
         
         AddProjectCommand = ReactiveCommand.CreateFromTask(async () =>
         {
+            var mainWindow = (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+            
             if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new AddProjectWindow()
                 {
-                    DataContext = new AddProjectViewModel(this.user)
+                    DataContext = new AddProjectViewModel(this.user, mainWindow)
                 };
 
                 desktop.MainWindow.Show();
             }
             
+            /*
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+
+                var projWindow = new AddProjectWindow();
+                projWindow = new AddProjectWindow()
+                {
+                    DataContext = new AddProjectViewModel(this.user, projWindow)
+                };
+                await projWindow.ShowDialog(desktop.MainWindow);
+            }
+            */
+            
+
         });
         
         LogOut = ReactiveCommand.Create(() =>
@@ -77,7 +94,6 @@ public class MainWindowViewModel : ViewModelBase
             var mainWindow = (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
             if (mainWindow != null)
             {
-                Console.WriteLine(mainWindow.Title);
                 mainWindow.Hide();
             }
 

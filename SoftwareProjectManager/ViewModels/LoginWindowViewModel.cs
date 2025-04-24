@@ -32,6 +32,7 @@ public class LoginWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _inputPassword, value);
     }
     
+    OrgUser _default = new OrgUser(1, "mainuser", "password");
     OrgUser _patrick = new OrgUser("pcox", "password");
     OrgUser _khamin = new OrgUser("kkeller", "password");
     OrgUser _jr = new OrgUser("jstraiton", "password");
@@ -48,6 +49,7 @@ public class LoginWindowViewModel : ViewModelBase
 
     public LoginWindowViewModel()
     {
+        users.Add(_default);
         users.Add(_patrick);
         users.Add(_khamin);
         users.Add(_jr);
@@ -58,9 +60,8 @@ public class LoginWindowViewModel : ViewModelBase
         {
             foreach (OrgUser user in users)
             {
-                if (_inputUsername == user.GetUsername() && _inputPassword == user.GetPassword())
+                if (_inputUsername == user.GetUsername() && user.Login(_inputPassword))
                 {
-
 
                     var mainWindow =
                         (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
@@ -70,6 +71,7 @@ public class LoginWindowViewModel : ViewModelBase
                         Console.WriteLine(mainWindow.Title);
                         mainWindow.Hide();
                     }
+                    
 
 
                     if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

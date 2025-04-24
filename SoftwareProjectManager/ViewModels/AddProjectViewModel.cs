@@ -1,6 +1,10 @@
 using System;
 using System.Windows.Input;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using ReactiveUI;
+using SoftwareProjectManager.Views;
 using src.Models;
 
 namespace SoftwareProjectManager.ViewModels;
@@ -46,7 +50,7 @@ public class AddProjectViewModel : ViewModelBase
         
     }
 
-    public AddProjectViewModel(OrgUser user)
+    public AddProjectViewModel(OrgUser user, Window mainWindow)
     {
         AddProjectCommand = ReactiveCommand.Create(() =>
         {
@@ -60,7 +64,23 @@ public class AddProjectViewModel : ViewModelBase
                         ErrorMessage = "";
                         
                         Project newProject = new Project(idConversion, ProjectName, ProjectDescription);
+                        
+                        var mainWindow =
+                            (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
+                            ?.MainWindow;
+                        if (mainWindow != null)
+                        {
+                            mainWindow.Hide();
+                        }
+                        
+                        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                        {
+                            desktop.MainWindow = mainWindow;
+                        }
+                        
+                        // Place this line above the closing code.
                         user.AddProject(newProject);
+
                         
                     }
                     catch (Exception e)
