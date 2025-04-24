@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:SoftwareProjectManager.ViewModels"
+        x:DataType="vm:EmployeeWindowViewModel"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width = "1280"
+        Height = "720"
+        x:Class="SoftwareProjectManager.Views.EmployeeWindow"
+        Title="SPM Employee"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/SPM icon.ico"
+        >
+        
+        <Panel>
+                <Panel Margin="0 20">
+                        <TextBlock Text="Software Project Manager" FontFamily="{StaticResource Nunito}" FontSize="30" 
+                                   HorizontalAlignment="Center"/>
+                        <Border Padding = "15">
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                          </StackPanel>
+                        </Border>
+                </Panel>
+        </Panel>
+</Window>
