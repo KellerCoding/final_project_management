@@ -192,7 +192,7 @@ public class Project
             command.Parameters.AddWithValue("@PROJECTID", ID);
             command.Parameters.AddWithValue("@ID", temp.GetID());
             command.Parameters.AddWithValue("@NAME", temp.GetName());
-            command.Parameters.AddWithValue("JOB_TITLE", temp.GetJobTitle());
+            command.Parameters.AddWithValue("@JOB_TITLE", temp.GetJobTitle());
 
             command.ExecuteNonQuery();
         }
