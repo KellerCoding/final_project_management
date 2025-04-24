@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using Microsoft.Data.Sqlite;
+using Tmds.DBus.Protocol;
+
 namespace src.Models;
 
 public class Project
@@ -79,6 +81,7 @@ public class Project
 
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -110,6 +113,7 @@ public class Project
 
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -195,6 +199,7 @@ public class Project
             command.Parameters.AddWithValue("@JOB_TITLE", temp.GetJobTitle());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -218,10 +223,11 @@ public class Project
             command.Parameters.AddWithValue("@NAME", temp.GetName());
             command.Parameters.AddWithValue("@DESCR", temp.GetDescription());
             //can't pass a double??
-            //command.Parameters.Add("@WEEKLYPERSONHOURS", temp.GetWeeklyPersonHours());
-            //command.Parameters.Add("TOTALPERSONHOURS", temp.GetTotalPersonHours());
+            command.Parameters.Add("@WEEKLYPERSONHOURS", 0);
+            command.Parameters.Add("TOTALPERSONHOURS", 0);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -248,6 +254,7 @@ public class Project
             command.Parameters.AddWithValue("@PRIORITY", temp.GetPriority());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -274,6 +281,7 @@ public class Project
             command.Parameters.AddWithValue("@PRIORITY", temp.GetPriority());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -298,6 +306,7 @@ public class Project
             command.Parameters.AddWithValue("@DESCR", temp.GetDescription());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {

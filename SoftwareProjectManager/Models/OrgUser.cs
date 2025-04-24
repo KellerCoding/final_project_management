@@ -84,6 +84,7 @@ public class OrgUser
                     
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -114,6 +115,7 @@ public class OrgUser
                     tempArrayList.Add(reader.GetString(0));
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -140,6 +142,7 @@ public class OrgUser
             command.Parameters.AddWithValue("@USERID", UserID);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -164,6 +167,7 @@ public class OrgUser
             command.Parameters.AddWithValue("@PASSWORD", password);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
