@@ -15,27 +15,27 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SoftwareProjectManager
-build_property.ProjectDir = C:\Users\strai\RiderProjects\NewSoftwareProjectManagement\final_project_management\SoftwareProjectManager\
+build_property.ProjectDir = C:\Users\10jon\OneDrive\Desktop\CS Labs & Assignments\FinalSPM\final\SoftwareProjectManager\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[C:/Users/strai/RiderProjects/NewSoftwareProjectManagement/final_project_management/SoftwareProjectManager/App.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/strai/RiderProjects/NewSoftwareProjectManagement/final_project_management/SoftwareProjectManager/Views/AddProjectWindow.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/AddProjectWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/strai/RiderProjects/NewSoftwareProjectManagement/final_project_management/SoftwareProjectManager/Views/LoginWindow.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/LoginWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/strai/RiderProjects/NewSoftwareProjectManagement/final_project_management/SoftwareProjectManager/Views/MainWindow.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/strai/RiderProjects/NewSoftwareProjectManagement/final_project_management/SoftwareProjectManager/Views/NewProjectWindow.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/NewProjectWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/strai/RiderProjects/NewSoftwareProjectManagement/final_project_management/SoftwareProjectManager/Views/ProjectWindow.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/ProjectWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/strai/RiderProjects/NewSoftwareProjectManagement/final_project_management/SoftwareProjectManager/Views/WelcomeView.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/WelcomeView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
