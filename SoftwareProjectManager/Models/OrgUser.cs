@@ -9,9 +9,6 @@ public class OrgUser
 {
     private int UserID;
     private string username, password;
-    private SqliteConnection sqliteConnection;
-
-
 
     public OrgUser(string username, string password)
     {
@@ -89,7 +86,6 @@ public class OrgUser
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
         }
         return dataBasePassword;
     }
@@ -120,7 +116,6 @@ public class OrgUser
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
         }
         return tempArrayList;
     }
@@ -147,7 +142,6 @@ public class OrgUser
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
         }
     }
 

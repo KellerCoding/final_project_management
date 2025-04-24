@@ -316,5 +316,111 @@ public class Project
     }
     
     //Updating data in tables
+    //Update Requirement status & priority
+    //Update Phase WeeklyHours & TotalHours
+
+    void UpdateTable(string sql, int tempID)
+    {
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", tempID);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    void UpdateTable(string sql, int tempID, int tempStatus)
+    {
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", tempID);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    void MarkFunctionalReqComplete(int FunctionalReqID)
+    {
+        var sql = "UPDATE FREQUIREMENT SET STATUS SET STATUS = 1 WHERE ID = @ID";
+        UpdateTable(sql, FunctionalReqID);
+    }
+
+    void MarkNonFunctionalReqComplete(int NonFunctionalReqID)
+    {
+        var sql = "UPDATE NFREQUIREMENT SET STATUS SET STATUS = 1 WHERE ID = @ID";
+        UpdateTable(sql, NonFunctionalReqID);
+    }
+
+    void ChangeFunctionalReqPriority(int FuntionalReqID, int tempPriority)
+    {
+        var sql = "UPDATE FREQUIREMENT SET PRIORITY = @PRIORITY WHERE ID = @ID";
+        UpdateTable(sql, FuntionalReqID, tempPriority);
+    }
+    void ChangeNonFunctionalReqPriority(int FuntionalReqID, int tempPriority)
+    {
+        var sql = "UPDATE NFREQUIREMENT SET PRIORITY = @PRIORITY WHERE ID = @ID";
+        UpdateTable(sql, FuntionalReqID, tempPriority);
+    }
     
+    void UpdatePhaseWeeklyHours(int PhaseID, double tempHours)
+    {
+        var sql = "UPDATE PHASE SET WEEKLYPERSONHOURS = @WEEKLYHOURS WHERE ID = @ID";
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", PhaseID);
+            command.Parameters.AddWithValue("@WEEKLYHOURS", tempHours);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    void UpdatePhaseTotalHours(int PhaseID, double tempHours)
+    {
+        var sql = "UPDATE PHASE SET TOTALPERSONHOURS = @TOTALHOURS WHERE ID = @ID";
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", PhaseID);
+            command.Parameters.AddWithValue("@TOTALHOURS", tempHours);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }
