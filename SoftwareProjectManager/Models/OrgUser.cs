@@ -123,8 +123,8 @@ public class OrgUser
     //Add a new project to the database
     public void AddProject(Project temp)
     {
-        var sql = "INSERT INTO PROJECT" +
-                  "VALUES (@ID,@NAME, @DESCR, @USERID)";
+        var sql = "INSERT INTO PROJECT (ID, NAME, DESCR, USERID) " +
+                  "VALUES (@ID, @NAME, @DESCR, @USERID)";
         try
         {
             using var connection = new SqliteConnection($"Data Source=projectDB");
