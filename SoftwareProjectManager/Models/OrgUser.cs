@@ -19,6 +19,13 @@ public class OrgUser
         this.password = password;
     }
 
+    public OrgUser(int tempID, string tempUsername, string tempPassword)
+    {
+        UserID = tempID;
+        username = tempUsername;
+        password = tempPassword;
+    }
+
     public int GetUserID()
     {
         return UserID;

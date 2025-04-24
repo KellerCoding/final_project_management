@@ -125,6 +125,11 @@ public class Project
         string sql = "Select * from EMPLOYEE where ID = @ID";
         return DatabaseCall(sql, tempID);
     }
+    public ArrayList GetPhase(int tempID)
+    {
+        string sql = "Select * from PHASE where ID = @ID";
+        return DatabaseCall(sql, tempID);
+    }
     
     public ArrayList GetFunctionalReq(int tempID)
     {
@@ -147,6 +152,11 @@ public class Project
     public ArrayList GetTeamMembers()
     {
         var sql = "Select * from EMPLOYEE where PROJECTID = @PROJECTID";
+        return DatabaseCall(sql);
+    }
+    public ArrayList GetPhases()
+    {
+        string sql = "Select * from PHASE where PROJECTID = @PROJECTID";
         return DatabaseCall(sql);
     }
     
@@ -183,6 +193,33 @@ public class Project
             command.Parameters.AddWithValue("@ID", temp.GetID());
             command.Parameters.AddWithValue("@NAME", temp.GetName());
             command.Parameters.AddWithValue("JOB_TITLE", temp.GetJobTitle());
+
+            command.ExecuteNonQuery();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    void AddPhase(Phase temp)
+    {
+        var sql = "INSERT INTO PHASE " +
+                  "VALUES (@ID, @NAME, @DESCR, @WEEKLYPERSONHOURS, @TOTALPERSONHOURS, @PROJECTID)";
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@PROJECTID", ID);
+            command.Parameters.AddWithValue("@ID", temp.GetID());
+            command.Parameters.AddWithValue("@NAME", temp.GetName());
+            command.Parameters.AddWithValue("@DESCR", temp.GetDescription());
+            //can't pass a double??
+            //command.Parameters.Add("@WEEKLYPERSONHOURS", temp.GetWeeklyPersonHours());
+            //command.Parameters.Add("TOTALPERSONHOURS", temp.GetTotalPersonHours());
 
             command.ExecuteNonQuery();
         }
