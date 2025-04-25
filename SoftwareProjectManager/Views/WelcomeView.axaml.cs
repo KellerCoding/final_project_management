@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace SoftwareProjectManager.Views;
 
-public partial class WelcomeView : UserControl
+public partial class WelcomeView : Window
 {
     public WelcomeView()
     {

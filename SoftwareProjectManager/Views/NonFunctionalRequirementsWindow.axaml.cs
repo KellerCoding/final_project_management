@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace SoftwareProjectManager.Views;
 
-public partial class ProjectWindow : Window
+public partial class NonFunctionalRequirementsWindow : Window
 {
-    public ProjectWindow()
+    public NonFunctionalRequirementsWindow()
     {
         InitializeComponent();
     }

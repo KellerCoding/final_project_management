@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:SoftwareProjectManager.ViewModels"
+        x:DataType="vm:FunctionalRequirementsViewModel"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width = "1280" Height = "720"
+        x:Class="SoftwareProjectManager.Views.FunctionalRequirementsWindow"
+        Title="Functional Requirements"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/SPM icon.ico">
+        
+        <StackPanel>
+                <Panel HorizontalAlignment="Center">
+                        <!-- Will assign the second button a command that will swap to counterpart screen -->
+                        <Button Content="Functional Requirements" IsEnabled="False"
+                                HorizontalAlignment="Left" Margin="0 15 200 0"/>
+                        <Button Content="NonFunctional Requirements"
+                                HorizontalAlignment="Right" Margin="200 15 0 0"
+                                Command="{Binding SwitchRequirementsCommand}"/>
+                </Panel>
+                <Panel>
+                        <TextBlock Text="{Binding Title,
+                        StringFormat='Project: {0}'}"/>
+                </Panel>
+                
+                <Panel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <DataGrid x:Name="DataGrid" ItemsSource="{Binding Requirements}"
+                                  IsReadOnly="True"
+                                  CanUserReorderColumns="False"
+                                  CanUserResizeColumns="False"
+                                  CanUserSortColumns="True"
+                                  GridLinesVisibility="All"
+                                  BorderThickness="10" BorderBrush="Transparent"
+                                  Background="Transparent"
+                                  Width="1000"
+                                  Height="500"
+                                  >
+
+                                <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID"  Binding="{Binding ID}" FontSize="12"/>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                                        <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"></DataGridTextColumn>
+                                        <DataGridCheckBoxColumn Header="Status" Binding = "{Binding Finished}"/>
+                                </DataGrid.Columns>
+                        </DataGrid>
+                </Panel>
+        </StackPanel>
+        
+</Window>
