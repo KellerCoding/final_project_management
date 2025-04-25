@@ -60,7 +60,7 @@ public class LoginWindowViewModel : ViewModelBase
         {
             foreach (OrgUser user in users)
             {
-                if (_inputUsername == user.GetUsername() && user.Login(user.GetDatabasePassword()))
+                if (_inputUsername == user.GetUsername() && user.Login(_inputPassword))
                 {
 
                     var mainWindow =
