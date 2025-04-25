@@ -10,13 +10,17 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using ReactiveUI;
 using SoftwareProjectManager.Views;
+using src.Models;
 
 namespace SoftwareProjectManager.ViewModels;
 
 public class EmployeeWindowViewModel : ViewModelBase
 {
    
+    public ObservableCollection<Employee> Employees { get; }
     public EmployeeWindowViewModel(){
+        
+        
 
     }
 }

@@ -22,7 +22,12 @@
                                    HorizontalAlignment="Center"/>
                         <Border Padding = "15">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                          </StackPanel>
+                                        <DataGrid Margin="20" ItemsSource="{Binding Employee}" 
+                                                  AutoGenerateColumns="True" IsReadOnly="True" 
+                                                  GridLinesVisibility="All"
+                                                  BorderThickness="1" BorderBrush="Gray">
+                                        </DataGrid>
+                                </StackPanel>
                         </Border>
                 </Panel>
         </Panel>
