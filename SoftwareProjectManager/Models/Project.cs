@@ -205,7 +205,7 @@ public class Project
     //Inserting values into the database
     void AddEmployee(Employee temp)
     {
-        var sql = "INSERT INTO EMPLOYEE " +
+        var sql = "INSERT INTO EMPLOYEE (ID, NAME, JOB_TITLE, PROJECTID) " +
                   "VALUES (@ID, @NAME, @JOB_TITLE, @PROJECTID)";
         try
         {
@@ -230,7 +230,7 @@ public class Project
     
     void AddPhase(Phase temp)
     {
-        var sql = "INSERT INTO PHASE " +
+        var sql = "INSERT INTO PHASE (ID, NAME, DESCR, WEEKLYPERSONHOURS, TOTALPERSONHOURS, PROJECTID) " +
                   "VALUES (@ID, @NAME, @DESCR, @WEEKLYPERSONHOURS, @TOTALPERSONHOURS, @PROJECTID)";
         try
         {
@@ -258,8 +258,8 @@ public class Project
     
     void AddFunctionalReq(Requirement temp)
     {
-        var sql = "INSERT INTO FREQUIREMENT" +
-                  "VALUES (@ID,@NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
+        var sql = "INSERT INTO FREQUIREMENT (ID, NAME, DESCR, STATUS, PRIORITY, PROJECTID) " +
+                  "VALUES (@ID, @NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
             using var connection = new SqliteConnection($"Data Source=projectDB");
@@ -285,7 +285,7 @@ public class Project
 
     void AddNonFunctionalReq(Requirement temp)
     {
-        var sql = "INSERT INTO NFREQUIREMENT" +
+        var sql = "INSERT INTO NFREQUIREMENT (ID, NAME, DESCR, STATUS, PRIORITY, PROJECTID) " +
                   "VALUES (@ID,@NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
@@ -312,8 +312,8 @@ public class Project
 
     void AddRisk(Risk temp)
     {
-        var sql = "INSERT INTO RISK" +
-                  "VALUES (@ID,@NAME, @DESCR, @PROJECTID)";
+        var sql = "INSERT INTO RISK (ID, NAME, DESCR, PROJECTID) " +
+                  "VALUES (@ID, @NAME, @DESCR, @PROJECTID)";
         try
         {
             using var connection = new SqliteConnection($"Data Source=projectDB");

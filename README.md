@@ -1,6 +1,7 @@
 # Project-Management-System
 Welcome to the repository for our Project Management System. Here you will find all source code for this project. This application is being devloped in C#, and will utilize
-Avalonia to develop the User Interface, with NUnit to create basic unit tests to ensure a quality product. 
+Avalonia to develop the User Interface, with NUnit to create basic unit tests to ensure a quality product. This is the second repository for this project, we had to move in order to
+more easily switch to Reactive UI. The original repository, and older commits can be found [here](https://github.com/straitonrj/Project-Management-System).
 
 ## Table of Contents
 - [Team Members](#team-members)
@@ -28,21 +29,23 @@ For a more detailed look at the project, please take a look at our [Comprehensiv
 To Prepeare your enviornment to execute this application:
 - [Install .NET 8.0](https://dotnet.microsoft.com/en-us/download)
 - Clone this repository
-- Open up the terminal
-- Navigate to wherever you downloaded the Software Management solution
-- Example:
-```
-cd RiderProjects
-cd SoftwareManagement
-```
 
 ## Executing the Application
 To execute the application follow these steps:
 - Open the command prompt
+- Navigate to wherever you downloaded the Software Management solution
+- When inside the folder, type "dotnet run" into the terminal
+- Example:
+```
+cd RiderProjects
+cd SoftwareManagement
+dotnet run
+```
 
 ## Documentation
 - [Quick Plan](./Documents/QuickPlan.pdf)
 - [Comprehensive Plan](./Documents/ComprehensivePlan.pdf)
+- [Notes from our Meetings](./Documents/GroupNotes.pdf)
 
 ## Final Video Presentation
 

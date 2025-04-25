@@ -148,7 +148,7 @@ public class OrgUser
     //Add a new user to data after user creates an account
     public void AddNewUser()
     {
-        var sql = "INSERT INTO ORGUSER" +
+        var sql = "INSERT INTO ORGUSER (ID, USERNAME, PASSWORD) " +
                   "VALUES (@ID, @USERNAME, @PASSWORD)";
         try
         {
