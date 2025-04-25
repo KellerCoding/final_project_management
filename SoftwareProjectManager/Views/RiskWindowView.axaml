@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:SoftwareProjectManager.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SoftwareProjectManager.Views.RiskWindowView"
+        x:DataType="viewModels:RiskWindowViewModel"
+        Title="Risk Management">
+    <Window.DataContext>
+        <viewModels:RiskWindowViewModel/>
+    </Window.DataContext>
+    <d:Design.DataContext>
+        <viewModels:RiskWindowViewModel />
+    </d:Design.DataContext>
+    <DockPanel Margin="10">
+        
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
+            <Button Content="Back" Width="80" Height="30" Command="{Binding }" />
+            <Button Content="Add Risk" Command="{Binding AddRiskCommand}" Width="100" Height="30"/>
+            <Button Content="Delete Risk" Command="{Binding RemoveRiskCommand}" Width="100" Height="30"/>
+            <Button Content="Save Changes" Command="{Binding SaveChangesCommand }" Width="120" Height="30"/>
+            <TextBlock VerticalAlignment="Center" Text="Select ID:" Margin="20,0,0,0"/>
+            <TextBox Width="100" Height="30" Text="{Binding ProjectIDForTable}"/>
+            <Button Content="Enter" Width="80" Height="30" Command="{Binding tableByProjectIDCommand }"/>
+        </StackPanel>
+        
+        
+        
+        
+        <DataGrid 
+            x:Name="RiskDataGrid"
+            IsReadOnly="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
+            CanUserSortColumns="True"
+            GridLinesVisibility="All"
+            ItemsSource="{Binding Risks}"
+            BorderThickness="1" 
+            BorderBrush="Gray"
+            SelectedItem="{Binding RiskSelected}"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ProjectID" Binding="{Binding ProjectId}" Width="200"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>
