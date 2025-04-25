@@ -13,7 +13,7 @@ public class Project
 {
     //Attributes
     private int ID;
-    private string Name { get; set; }
+    public string Name { get; set; }
 
     private string Description;
     /*
