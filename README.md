@@ -33,7 +33,8 @@ To Prepeare your enviornment to execute this application:
 ## Executing the Application
 To execute the application follow these steps:
 - Open the command prompt
-- Navigate to wherever you downloaded the Software Management solution
+- Navigate to wherever you downloaded the final_project_management file
+- Open up the SoftwareProjectManager solution
 - When inside the folder, type "dotnet run" into the terminal
 - Example:
 ```
