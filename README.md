@@ -39,7 +39,8 @@ To execute the application follow these steps:
 - Example:
 ```
 cd RiderProjects
-cd SoftwareManagement
+cd final_project_management
+cd SoftwareProjectManager
 dotnet run
 ```
 
