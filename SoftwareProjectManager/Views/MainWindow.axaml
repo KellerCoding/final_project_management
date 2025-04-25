@@ -41,7 +41,7 @@
                            FontFamily="{StaticResource Nunito}" FontSize="24"/>
                 <TextBlock Text="Projects:" FontFamily="{StaticResource Nunito}" FontSize="24"
                            HorizontalAlignment="Right"/>
-                <Button Content="+" HorizontalAlignment="Right" Margin = "0 0 -290 0" MaxWidth="27"
+                <Button Content="+" HorizontalAlignment="Right" Margin = "0 0 -250 0" MaxWidth="27"
                         Command="{Binding AddProjectCommand}"/>
             </Panel>
             <Panel HorizontalAlignment="Left" Margin="825 0 0 0">
@@ -78,7 +78,12 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                             
+<<<<<<< HEAD
                         <DataGridTextColumn Header="Title"  Binding="{Binding Name}" Width="300"/>
+=======
+                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}"
+                                            FontSize="12"/>
+>>>>>>> origin/main
                         
                     </DataGrid.Columns>
                 </DataGrid>

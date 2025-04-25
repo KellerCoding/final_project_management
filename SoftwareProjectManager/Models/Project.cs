@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Microsoft.Data.Sqlite;
@@ -36,6 +35,8 @@ public class Project
 
     public void ViewProject(Project tempProject)
     {
+        Console.WriteLine(tempProject.GetID());
+
                 
         if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -85,7 +86,7 @@ public class Project
         ArrayList tempArrayList = new ArrayList();
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
             
             using var command = new SqliteCommand(sql,connection);
@@ -121,7 +122,7 @@ public class Project
         ArrayList tempArrayList = new ArrayList();
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
             
             using var command = new SqliteCommand(sql,connection);
@@ -215,7 +216,7 @@ public class Project
                   "VALUES (@ID, @NAME, @JOB_TITLE, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -240,7 +241,7 @@ public class Project
                   "VALUES (@ID, @NAME, @DESCR, @WEEKLYPERSONHOURS, @TOTALPERSONHOURS, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -268,7 +269,7 @@ public class Project
                   "VALUES (@ID, @NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -295,7 +296,7 @@ public class Project
                   "VALUES (@ID,@NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -322,7 +323,7 @@ public class Project
                   "VALUES (@ID, @NAME, @DESCR, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -349,7 +350,7 @@ public class Project
     {
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -368,7 +369,7 @@ public class Project
     {
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -412,7 +413,7 @@ public class Project
         var sql = "UPDATE PHASE SET WEEKLYPERSONHOURS = @WEEKLYHOURS WHERE ID = @ID";
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -433,7 +434,7 @@ public class Project
         var sql = "UPDATE PHASE SET TOTALPERSONHOURS = @TOTALHOURS WHERE ID = @ID";
         try
         {
-            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            using var connection = new SqliteConnection($"Data Source=projectDB");
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -449,16 +450,4 @@ public class Project
             throw;
         }
     }
-    public static string GetDatabasePath()
-    {
-        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        
-        string projectRoot = Path.GetFullPath(Path.Combine(baseDirectory, "../../.."));
-    
-        string dbPath = Path.Combine(projectRoot, "projectDB");
-    
-        //Console.WriteLine("database at:" + dbPath);
-        return dbPath;
-    }
-    
 }
