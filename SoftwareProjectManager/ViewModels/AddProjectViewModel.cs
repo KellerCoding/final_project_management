@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -49,7 +50,7 @@ public class AddProjectViewModel : ViewModelBase
         
     }
 
-    public AddProjectViewModel(OrgUser user, Window mainWindow)
+    public AddProjectViewModel(OrgUser user, ObservableCollection<Project> projects)
     {
         AddProjectCommand = ReactiveCommand.Create(() =>
         {
@@ -65,6 +66,7 @@ public class AddProjectViewModel : ViewModelBase
                         Project newProject = new Project(idConversion, ProjectName, ProjectDescription);
                         // Place this line above the closing code.
                         user.AddProject(newProject);
+                        projects.Add(newProject);
                         
                         var mainWindow =
                             (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)

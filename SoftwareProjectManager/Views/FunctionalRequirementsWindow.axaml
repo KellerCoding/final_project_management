@@ -17,15 +17,21 @@
         <StackPanel>
                 <Panel HorizontalAlignment="Center">
                         <!-- Will assign the second button a command that will swap to counterpart screen -->
-                        <Button Content="Functional Requirements" IsEnabled="False"
+                        <Button Content="Functional Requirements" IsEnabled="False" FontFamily="{StaticResource Nunito}"
                                 HorizontalAlignment="Left" Margin="0 15 200 0"/>
-                        <Button Content="NonFunctional Requirements"
+                        <Button Content="NonFunctional Requirements" FontFamily="{StaticResource Nunito}"
                                 HorizontalAlignment="Right" Margin="200 15 0 0"
                                 Command="{Binding SwitchRequirementsCommand}"/>
+                        
                 </Panel>
+                <Separator/>
                 <Panel>
                         <TextBlock Text="{Binding Title,
-                        StringFormat='Project: {0}'}"/>
+                        StringFormat='Project: {0}'}" FontSize="24" FontFamily="{StaticResource Nunito}"
+                                   HorizontalAlignment="Center"/>
+                        <Button Content="Home" Command="{Binding HomeCommand}"
+                                HorizontalAlignment="Right" Margin = "100 15"/>
+                        
                 </Panel>
                 
                 <Panel HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -42,11 +48,11 @@
                                   >
 
                                 <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID"  Binding="{Binding ID}" FontSize="12"/>
-                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                                        <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"></DataGridTextColumn>
-                                        <DataGridCheckBoxColumn Header="Status" Binding = "{Binding Finished}"/>
+                                        <DataGridTextColumn Header="ID" Width="50" Binding="{Binding ID}"/>
+                                        <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}" />
+                                        <DataGridTextColumn Header="Description" Width="600" Binding="{Binding Description}"/>
+                                        <DataGridTextColumn Header="Priority" Width="100" Binding="{Binding Priority}"/>
+                                        <DataGridCheckBoxColumn Header="Status" Width="30" Binding = "{Binding Finished}"/>
                                 </DataGrid.Columns>
                         </DataGrid>
                 </Panel>

@@ -37,7 +37,7 @@ public class MainWindowViewModel : ViewModelBase
     public ObservableCollection<Project>? UserProjects
     {
         get => _userProjects;
-        set => _userProjects = value;
+        set => this.RaiseAndSetIfChanged(ref _userProjects, value);
     }
 
 
@@ -80,7 +80,7 @@ public class MainWindowViewModel : ViewModelBase
             {
                 desktop.MainWindow = new AddProjectWindow()
                 {
-                    DataContext = new AddProjectViewModel(this.user, mainWindow)
+                    DataContext = new AddProjectViewModel(this.user, UserProjects)
                 };
 
                 desktop.MainWindow.Show();

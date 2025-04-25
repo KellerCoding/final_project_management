@@ -6,9 +6,9 @@ namespace src.Models;
 public class Requirement
 {
     //Might need to be string to do ID's like '1.1.1'?
-    private int ID {get; set;}
-    private int Priority {get; set;}
-    private string Name {get; set;}
+    public int ID {get; set;}
+    public int Priority {get; set;}
+    public string Name {get; set;}
     private string Description {get; set;}
     private bool Finished {get; set;}
     //Arraylist of sub-requirements attached to existing requirement

@@ -60,16 +60,25 @@
                           Height="400"
                           FontSize="12">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="60">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="View" Command="{Binding ViewProject}"
-                                            CommandParameter="{Binding .}"/>
+                                    <Button Content="Reqs" Command="{Binding ViewProject}"
+                                            CommandParameter="{Binding .}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Width="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Risks" Command="{Binding ViewProject}"
+                                            CommandParameter="{Binding .}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                             
-                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}" Width="320"/>
+                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}" Width="300"/>
                         
                     </DataGrid.Columns>
                 </DataGrid>

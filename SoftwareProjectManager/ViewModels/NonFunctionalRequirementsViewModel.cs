@@ -16,7 +16,7 @@ using src.Models;
 
 namespace SoftwareProjectManager.ViewModels;
 
-public class NonFunctionalRequirementsViewModel
+public class NonFunctionalRequirementsViewModel : ViewModelBase
 {
     public ICommand SwitchRequirementsCommand { get; }
     Project _project;
@@ -25,9 +25,16 @@ public class NonFunctionalRequirementsViewModel
     public string? Title { get; set; }
     public string? ID { get; set; }
     
-    private ArrayList _requirements = new ArrayList();
+    private ObservableCollection<Requirement> _requirements = new ObservableCollection<Requirement>();
+
+    public ObservableCollection<Requirement> Requirements
+    {
+        get => _requirements;
+        set => this.RaiseAndSetIfChanged(ref _requirements, value);
+    }
     
-    public ObservableCollection<Requirement> Requirements { get; }
+    private ArrayList reqData = new ArrayList();
+    
     
 
     public NonFunctionalRequirementsViewModel(Project project)
@@ -36,11 +43,24 @@ public class NonFunctionalRequirementsViewModel
         Title = Project.GetName();
         ID = Convert.ToString(Project.GetID());
 
-        _requirements = Project.GetNonFunctionalReq(Project.GetID());
+        reqData = project.GetNonFunctionalReqs();
 
-        foreach (Requirement req in _requirements)
+        for (int i = 0; i < reqData.Count - 4; i++)
         {
-            Requirements.Add(req);
+            if (i % 5 == 0)
+            {
+                try
+                {
+                    bool status = Convert.ToInt32(reqData[i + 3]) != 0;
+                    Requirement newReq = new Requirement(Convert.ToInt32(reqData[i]), Convert.ToString(reqData[i + 1]),
+                        Convert.ToString(reqData[i + 2]), Convert.ToInt32(reqData[i + 4]));
+                    Requirements.Add(newReq);
+                }
+                catch (Exception e)
+                {
+                    
+                }
+            }
         }
 
         SwitchRequirementsCommand = ReactiveCommand.Create(() =>

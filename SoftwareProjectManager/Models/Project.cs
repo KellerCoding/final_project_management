@@ -97,6 +97,10 @@ public class Project
                 while (reader.Read())
                 {
                     tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
 
                 }
             }
@@ -129,7 +133,10 @@ public class Project
                 while (reader.Read())
                 {
                     tempArrayList.Add(reader.GetString(0));
-
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
                 }
             }
             connection.Close();
