@@ -65,7 +65,7 @@ public class OrgUser
         var sql = "select PASSWORD from ORGUSER where USERNAME = @USERNAME";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
            
 
@@ -89,6 +89,19 @@ public class OrgUser
         }
         return dataBasePassword;
     }
+    
+    public static string GetDatabasePath()
+    {
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        
+        string projectRoot = Path.GetFullPath(Path.Combine(baseDirectory, "../../.."));
+    
+        string dbPath = Path.Combine(projectRoot, "projectDB");
+    
+        //Console.WriteLine("database at:" + dbPath);
+        return dbPath;
+    }
+
 
     public ArrayList ViewProjects()
     {
@@ -96,7 +109,7 @@ public class OrgUser
         var sql = "select * from PROJECT where USERID = @USERID";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source=" + GetDatabasePath());
             connection.Open();
            
 
@@ -109,6 +122,8 @@ public class OrgUser
                 while (reader.Read())
                 {
                     tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
                 }
             }
             connection.Close();
@@ -127,7 +142,7 @@ public class OrgUser
                   "VALUES (@ID, @NAME, @DESCR, @USERID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -152,7 +167,7 @@ public class OrgUser
                   "VALUES (@ID, @USERNAME, @PASSWORD)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
