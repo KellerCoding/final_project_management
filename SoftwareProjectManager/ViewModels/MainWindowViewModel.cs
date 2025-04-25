@@ -11,6 +11,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Logging;
 using ReactiveUI;
+using SoftwareProjectManager.Models;
 using SoftwareProjectManager.Views;
 using src.Models;
 

@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Microsoft.Data.Sqlite;
 using SoftwareProjectManager.ViewModels;
 using SoftwareProjectManager.Views;
+using src.Models;
 using Tmds.DBus.Protocol;
 
-namespace src.Models;
+namespace SoftwareProjectManager.Models;
 
 public class Project
 {
@@ -86,7 +88,7 @@ public class Project
         ArrayList tempArrayList = new ArrayList();
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
             
             using var command = new SqliteCommand(sql,connection);
@@ -118,7 +120,7 @@ public class Project
         ArrayList tempArrayList = new ArrayList();
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
             
             using var command = new SqliteCommand(sql,connection);
@@ -176,7 +178,35 @@ public class Project
     public ArrayList GetTeamMembers()
     {
         var sql = "Select * from EMPLOYEE where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;;
     }
     public ArrayList GetPhases()
     {
@@ -203,13 +233,13 @@ public class Project
     }
     
     //Inserting values into the database
-    void AddEmployee(Employee temp)
+    public void AddEmployee(Employee temp)
     {
         var sql = "INSERT INTO EMPLOYEE (ID, NAME, JOB_TITLE, PROJECTID) " +
                   "VALUES (@ID, @NAME, @JOB_TITLE, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -442,5 +472,17 @@ public class Project
             Console.WriteLine(e);
             throw;
         }
+    }
+    
+    public static string GetDatabasePath()
+    {
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        
+        string projectRoot = Path.GetFullPath(Path.Combine(baseDirectory, "../../.."));
+    
+        string dbPath = Path.Combine(projectRoot, "projectDB");
+    
+        //Console.WriteLine("database at:" + dbPath);
+        return dbPath;
     }
 }

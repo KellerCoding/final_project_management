@@ -11,7 +11,7 @@
         Title="SPM Employee"
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"
-        ExtendClientAreaToDecorationsHint="False"
+        ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/SPM icon.ico"
         >
@@ -20,12 +20,29 @@
                 <Panel Margin="0 20">
                         <TextBlock Text="Software Project Manager" FontFamily="{StaticResource Nunito}" FontSize="30" 
                                    HorizontalAlignment="Center"/>
-                        <Border Padding = "15">
+                        <Border Padding = "30">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                                        <DataGrid Margin="20" ItemsSource="{Binding Employee}" 
-                                                  AutoGenerateColumns="True" IsReadOnly="True" 
+                                        <DataGrid x:Name="DataGrid" ItemsSource="{Binding Employees}"
+                                                  IsReadOnly="True"
+                                                  CanUserReorderColumns="False"
+                                                  CanUserResizeColumns="False"
+                                                  CanUserSortColumns="True"
                                                   GridLinesVisibility="All"
-                                                  BorderThickness="1" BorderBrush="Gray">
+                                                  BorderThickness="10" BorderBrush="Transparent"
+                                                  Background="Transparent"
+                                                  Width="1000"
+                                                  Height="1000"
+                                                  FontSize="12">
+                                                <DataGrid.Columns>
+                            
+                                                        <DataGridTextColumn Header="Name"  Binding="{Binding Name}"
+                                                                            FontSize="12"/>
+                                                        <DataGridTextColumn Header="Job Title" Binding="{Binding JobTitle}"
+                                                                            FontSize="12"/>
+                                                        <DataGridTextColumn Header="ID" Binding="{Binding ID}"
+                                                                            FontSize="12"/>
+                        
+                                                </DataGrid.Columns>
                                         </DataGrid>
                                 </StackPanel>
                         </Border>

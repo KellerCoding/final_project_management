@@ -29,7 +29,13 @@ build_property.EnableCodeStyleSeverity =
 [C:/Users/final/Projects/final_project_management/SoftwareProjectManager/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/AddProjectWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/EmployeeWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/FunctionalRequirementsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/LoginWindow.axaml]
@@ -41,7 +47,10 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/NewProjectWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/ProjectWindow.axaml]
+[C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/NonFunctionalRequirementsWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/RiskWindowView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/WelcomeView.axaml]
