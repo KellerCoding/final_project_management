@@ -3,6 +3,7 @@
         xmlns:vm="using:SoftwareProjectManager.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:src.Models"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         Width="1280"
         Height="720"
@@ -44,8 +45,10 @@
                         Command="{Binding AddProjectCommand}"/>
             </Panel>
             <Panel HorizontalAlignment="Left" Margin="825 0 0 0">
+                <UserControl x:Name="Root">
+
                 <!-- Create the Data Grid for the Projects -->
-                <DataGrid x:Name="DataGrid" ItemsSource="{Binding _userProjects}"
+                <DataGrid x:Name="DataGrid" ItemsSource="{Binding UserProjects}"
                           IsReadOnly="True"
                           CanUserReorderColumns="False"
                           CanUserResizeColumns="False"
@@ -53,24 +56,25 @@
                           GridLinesVisibility="All"
                           BorderThickness="10" BorderBrush="Transparent"
                           Background="Transparent"
-                          MaxWidth="400"
-                          MaxHeight="400"
+                          Width="400"
+                          Height="400"
                           FontSize="12">
-
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="View"/>
+                                    <Button Content="View" Command="{Binding ViewProject}"
+                                            CommandParameter="{Binding .}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
-                        <DataGridTextColumn Header="Title"  Binding="{Binding}"
+                            
+                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}"
                                             FontSize="12"/>
                         
                     </DataGrid.Columns>
                 </DataGrid>
+                </UserControl>
             </Panel>
             
         </StackPanel>

@@ -6,11 +6,11 @@ namespace src.Models;
 public class Requirement
 {
     //Might need to be string to do ID's like '1.1.1'?
-    private int ID;
-    private int Priority;
-    private string Name;
-    private string Description;
-    private bool Finished;
+    private int ID {get; set;}
+    private int Priority {get; set;}
+    private string Name {get; set;}
+    private string Description {get; set;}
+    private bool Finished {get; set;}
     //Arraylist of sub-requirements attached to existing requirement
     private ArrayList Children;
 
@@ -63,7 +63,7 @@ public class Requirement
         return Finished;
     }
 
-    public void SetID(int tempID)
+    public void SetId(int tempID)
     {
         ID = tempID;
     }

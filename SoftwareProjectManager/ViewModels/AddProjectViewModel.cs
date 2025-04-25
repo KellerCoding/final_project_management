@@ -13,36 +13,35 @@ public class AddProjectViewModel : ViewModelBase
 {
     public ICommand AddProjectCommand { get; set; }
     
-    private string? _projectName;
-    private string? _projectDescription;
-    private string? _tempId;
-    private string? _errorMessage;
+    private string? _projectName = string.Empty;
+    private string? _projectDescription = string.Empty;
+    private string? _tempId = string.Empty;
+    private string? _errorMessage = string.Empty;
 
     private int idConversion;
 
-    public string ProjectName
+    public string? ProjectName
     {
         get => _projectName;
         set => _projectName = value;
     }
 
-    public string ProjectDescription
+    public string? ProjectDescription
     {
         get => _projectDescription;
         set => _projectDescription = value;
     }
 
-    public string TempId
+    public string? TempId
     {
         get => _tempId;
         set => _tempId = value;
     }
 
-    public string ErrorMessage
+    public string? ErrorMessage
     {
         get => _errorMessage;
         set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
-        
     }
 
     public AddProjectViewModel()

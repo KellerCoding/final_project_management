@@ -1,6 +1,10 @@
 using System;
 using System.Collections;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Microsoft.Data.Sqlite;
+using SoftwareProjectManager.ViewModels;
+using SoftwareProjectManager.Views;
 using Tmds.DBus.Protocol;
 
 namespace src.Models;
@@ -9,7 +13,7 @@ public class Project
 {
     //Attributes
     private int ID;
-    private string Name;
+    private string Name { get; set; }
 
     private string Description;
     /*
@@ -27,6 +31,22 @@ public class Project
         ID = tempID;
         Name = tempName;
         Description = tempDescription;
+    }
+
+    public void ViewProject(Project tempProject)
+    {
+        Console.WriteLine(tempProject.GetID());
+
+                
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new FunctionalRequirementsWindow()
+            {
+                DataContext = new FunctionalRequirementsViewModel(tempProject)
+            };
+                    
+            desktop.MainWindow.Show();
+        }
     }
 
     public int GetID()

@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
 using System;
+using Avalonia.Logging;
 
 namespace SoftwareProjectManager;
 
@@ -18,6 +19,6 @@ sealed class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
-            .LogToTrace()
+            .LogToTrace(LogEventLevel.Debug, LogArea.Binding)
             .UseReactiveUI();
 }

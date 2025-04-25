@@ -9,6 +9,7 @@ using System.Xml;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Logging;
 using ReactiveUI;
 using SoftwareProjectManager.Views;
 using src.Models;
@@ -19,7 +20,7 @@ public class MainWindowViewModel : ViewModelBase
 {
     public ICommand LogOut { get; }
     public ICommand AddProjectCommand { get; }
-    public ICommand EnableProjectCommand { get; }
+    public ICommand ViewProjectCommand { get; }
     private string? _userName;
     public string? UserName
     {
@@ -31,7 +32,13 @@ public class MainWindowViewModel : ViewModelBase
     
     
     
-    public ObservableCollection<string>? _userProjects { get; private set; }
+    private ObservableCollection<Project>? _userProjects = new ObservableCollection<Project>();
+
+    public ObservableCollection<Project>? UserProjects
+    {
+        get => _userProjects;
+        set => _userProjects = value;
+    }
 
 
 
@@ -47,18 +54,21 @@ public class MainWindowViewModel : ViewModelBase
 
         try
         {
-            projectNames = user.ViewProjects();
+            UserProjects.Add(new Project(5, "temp", "temp"));
+            UserProjects.Add(new Project(6, "temp2", "temp2"));
+            UserProjects.Add(new Project(7, "temp3", "temp3"));
+            //projectNames = user.ViewProjects();
         }
         catch (Exception e)
         {
-            
+
         }
 
         foreach (string project in projectNames)
         {
             try
             {
-                _userProjects.Add(project);
+                _userProjects.Add(new Project(0, project, project));
             }
             catch (Exception e)
             {
@@ -79,20 +89,6 @@ public class MainWindowViewModel : ViewModelBase
 
                 desktop.MainWindow.Show();
             }
-            
-            /*
-            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-
-                var projWindow = new AddProjectWindow();
-                projWindow = new AddProjectWindow()
-                {
-                    DataContext = new AddProjectViewModel(this.user, projWindow)
-                };
-                await projWindow.ShowDialog(desktop.MainWindow);
-            }
-            */
-            
 
         });
         
@@ -115,5 +111,16 @@ public class MainWindowViewModel : ViewModelBase
                 desktop.MainWindow.Show();
             }
         });
+
+        ViewProjectCommand = ReactiveCommand.Create((Project project) =>
+        {
+            Console.WriteLine(project.GetID());
+        });
+        
+    }
+
+    private void ViewProject(Project project)
+    {
+        Console.WriteLine(project.GetID());
     }
 }

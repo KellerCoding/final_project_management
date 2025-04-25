@@ -25,6 +25,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/AddProjectWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/FunctionalRequirementsWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/LoginWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
@@ -34,7 +37,7 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/NewProjectWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/ProjectRequirementsWindow.axaml]
+[C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/NonFunctionalRequirementsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/10jon/OneDrive/Desktop/CS Labs & Assignments/FinalSPM/final/SoftwareProjectManager/Views/WelcomeView.axaml]
