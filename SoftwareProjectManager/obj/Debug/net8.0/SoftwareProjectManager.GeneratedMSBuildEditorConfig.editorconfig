@@ -29,6 +29,12 @@ build_property.EnableCodeStyleSeverity =
 [/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/Views/AddProjectWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/Views/FunctionalRequirementsWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/Views/LoginWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
@@ -38,7 +44,7 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/Views/NewProjectWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/Views/ProjectWindow.axaml]
+[/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/Views/NonFunctionalRequirementsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/Views/RiskWindowView.axaml]
