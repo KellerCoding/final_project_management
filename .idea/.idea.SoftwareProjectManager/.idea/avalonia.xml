@@ -11,6 +11,7 @@
         <entry key="SoftwareProjectManager/Views/NewProjectWindow.axaml" value="SoftwareProjectManager/SoftwareProjectManager.csproj" />
         <entry key="SoftwareProjectManager/Views/NonFunctionalRequirementsWindow.axaml" value="SoftwareProjectManager/SoftwareProjectManager.csproj" />
         <entry key="SoftwareProjectManager/Views/ProjectWindow.axaml" value="SoftwareProjectManager/SoftwareProjectManager.csproj" />
+        <entry key="SoftwareProjectManager/Views/RiskWindowView.axaml" value="SoftwareProjectManager/SoftwareProjectManager.csproj" />
         <entry key="SoftwareProjectManager/Views/WelcomeView.axaml" value="SoftwareProjectManager/SoftwareProjectManager.csproj" />
         <entry key="SoftwareProjectManager/Views/WelcomeWindow.axaml" value="SoftwareProjectManager/SoftwareProjectManager.csproj" />
       </map>
