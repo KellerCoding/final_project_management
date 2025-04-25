@@ -1,14 +1,6 @@
-using System.Collections.ObjectModel;
-
 namespace SoftwareProjectManager.ViewModels;
 
-public class WelcomeViewModel : ViewModelBase
+public class WelcomeViewModel
 {
-    private string? _userName;
-    public ObservableCollection<string>? Projects { get; } = new();
-
-    public WelcomeViewModel()
-    {
-        //Projects.Add();
-    }
+    
 }

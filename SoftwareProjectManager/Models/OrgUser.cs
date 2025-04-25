@@ -9,9 +9,6 @@ public class OrgUser
 {
     private int UserID;
     private string username, password;
-    private SqliteConnection sqliteConnection;
-
-
 
     public OrgUser(string username, string password)
     {
@@ -84,11 +81,11 @@ public class OrgUser
                     
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
         }
         return dataBasePassword;
     }
@@ -114,11 +111,11 @@ public class OrgUser
                     tempArrayList.Add(reader.GetString(0));
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
         }
         return tempArrayList;
     }
@@ -126,8 +123,8 @@ public class OrgUser
     //Add a new project to the database
     public void AddProject(Project temp)
     {
-        var sql = "INSERT INTO PROJECT" +
-                  "VALUES (@ID,@NAME, @DESCR, @USERID)";
+        var sql = "INSERT INTO PROJECT (ID, NAME, DESCR, USERID) " +
+                  "VALUES (@ID, @NAME, @DESCR, @USERID)";
         try
         {
             using var connection = new SqliteConnection($"Data Source=projectDB");
@@ -140,18 +137,18 @@ public class OrgUser
             command.Parameters.AddWithValue("@USERID", UserID);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
         }
     }
 
     //Add a new user to data after user creates an account
     public void AddNewUser()
     {
-        var sql = "INSERT INTO ORGUSER" +
+        var sql = "INSERT INTO ORGUSER (ID, USERNAME, PASSWORD) " +
                   "VALUES (@ID, @USERNAME, @PASSWORD)";
         try
         {
@@ -164,6 +161,7 @@ public class OrgUser
             command.Parameters.AddWithValue("@PASSWORD", password);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {

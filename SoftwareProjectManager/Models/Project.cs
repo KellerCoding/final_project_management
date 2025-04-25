@@ -1,13 +1,19 @@
 using System;
 using System.Collections;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Microsoft.Data.Sqlite;
+using SoftwareProjectManager.ViewModels;
+using SoftwareProjectManager.Views;
+using Tmds.DBus.Protocol;
+
 namespace src.Models;
 
 public class Project
 {
     //Attributes
     private int ID;
-    private string Name;
+    private string Name { get; set; }
 
     private string Description;
     /*
@@ -25,6 +31,22 @@ public class Project
         ID = tempID;
         Name = tempName;
         Description = tempDescription;
+    }
+
+    public void ViewProject(Project tempProject)
+    {
+        Console.WriteLine(tempProject.GetID());
+
+                
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new FunctionalRequirementsWindow()
+            {
+                DataContext = new FunctionalRequirementsViewModel(tempProject)
+            };
+                    
+            desktop.MainWindow.Show();
+        }
     }
 
     public int GetID()
@@ -79,6 +101,7 @@ public class Project
 
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -110,6 +133,7 @@ public class Project
 
                 }
             }
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -181,7 +205,7 @@ public class Project
     //Inserting values into the database
     void AddEmployee(Employee temp)
     {
-        var sql = "INSERT INTO EMPLOYEE " +
+        var sql = "INSERT INTO EMPLOYEE (ID, NAME, JOB_TITLE, PROJECTID) " +
                   "VALUES (@ID, @NAME, @JOB_TITLE, @PROJECTID)";
         try
         {
@@ -195,6 +219,7 @@ public class Project
             command.Parameters.AddWithValue("@JOB_TITLE", temp.GetJobTitle());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -205,7 +230,7 @@ public class Project
     
     void AddPhase(Phase temp)
     {
-        var sql = "INSERT INTO PHASE " +
+        var sql = "INSERT INTO PHASE (ID, NAME, DESCR, WEEKLYPERSONHOURS, TOTALPERSONHOURS, PROJECTID) " +
                   "VALUES (@ID, @NAME, @DESCR, @WEEKLYPERSONHOURS, @TOTALPERSONHOURS, @PROJECTID)";
         try
         {
@@ -218,10 +243,11 @@ public class Project
             command.Parameters.AddWithValue("@NAME", temp.GetName());
             command.Parameters.AddWithValue("@DESCR", temp.GetDescription());
             //can't pass a double??
-            //command.Parameters.Add("@WEEKLYPERSONHOURS", temp.GetWeeklyPersonHours());
-            //command.Parameters.Add("TOTALPERSONHOURS", temp.GetTotalPersonHours());
+            command.Parameters.Add("@WEEKLYPERSONHOURS", 0);
+            command.Parameters.Add("TOTALPERSONHOURS", 0);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -232,8 +258,8 @@ public class Project
     
     void AddFunctionalReq(Requirement temp)
     {
-        var sql = "INSERT INTO FREQUIREMENT" +
-                  "VALUES (@ID,@NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
+        var sql = "INSERT INTO FREQUIREMENT (ID, NAME, DESCR, STATUS, PRIORITY, PROJECTID) " +
+                  "VALUES (@ID, @NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
             using var connection = new SqliteConnection($"Data Source=projectDB");
@@ -248,6 +274,7 @@ public class Project
             command.Parameters.AddWithValue("@PRIORITY", temp.GetPriority());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -258,7 +285,7 @@ public class Project
 
     void AddNonFunctionalReq(Requirement temp)
     {
-        var sql = "INSERT INTO NFREQUIREMENT" +
+        var sql = "INSERT INTO NFREQUIREMENT (ID, NAME, DESCR, STATUS, PRIORITY, PROJECTID) " +
                   "VALUES (@ID,@NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
@@ -274,6 +301,7 @@ public class Project
             command.Parameters.AddWithValue("@PRIORITY", temp.GetPriority());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -284,8 +312,8 @@ public class Project
 
     void AddRisk(Risk temp)
     {
-        var sql = "INSERT INTO RISK" +
-                  "VALUES (@ID,@NAME, @DESCR, @PROJECTID)";
+        var sql = "INSERT INTO RISK (ID, NAME, DESCR, PROJECTID) " +
+                  "VALUES (@ID, @NAME, @DESCR, @PROJECTID)";
         try
         {
             using var connection = new SqliteConnection($"Data Source=projectDB");
@@ -298,6 +326,7 @@ public class Project
             command.Parameters.AddWithValue("@DESCR", temp.GetDescription());
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
         catch (Exception e)
         {
@@ -307,5 +336,111 @@ public class Project
     }
     
     //Updating data in tables
+    //Update Requirement status & priority
+    //Update Phase WeeklyHours & TotalHours
+
+    void UpdateTable(string sql, int tempID)
+    {
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", tempID);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    void UpdateTable(string sql, int tempID, int tempStatus)
+    {
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", tempID);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    void MarkFunctionalReqComplete(int FunctionalReqID)
+    {
+        var sql = "UPDATE FREQUIREMENT SET STATUS SET STATUS = 1 WHERE ID = @ID";
+        UpdateTable(sql, FunctionalReqID);
+    }
+
+    void MarkNonFunctionalReqComplete(int NonFunctionalReqID)
+    {
+        var sql = "UPDATE NFREQUIREMENT SET STATUS SET STATUS = 1 WHERE ID = @ID";
+        UpdateTable(sql, NonFunctionalReqID);
+    }
+
+    void ChangeFunctionalReqPriority(int FuntionalReqID, int tempPriority)
+    {
+        var sql = "UPDATE FREQUIREMENT SET PRIORITY = @PRIORITY WHERE ID = @ID";
+        UpdateTable(sql, FuntionalReqID, tempPriority);
+    }
+    void ChangeNonFunctionalReqPriority(int FuntionalReqID, int tempPriority)
+    {
+        var sql = "UPDATE NFREQUIREMENT SET PRIORITY = @PRIORITY WHERE ID = @ID";
+        UpdateTable(sql, FuntionalReqID, tempPriority);
+    }
     
+    void UpdatePhaseWeeklyHours(int PhaseID, double tempHours)
+    {
+        var sql = "UPDATE PHASE SET WEEKLYPERSONHOURS = @WEEKLYHOURS WHERE ID = @ID";
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", PhaseID);
+            command.Parameters.AddWithValue("@WEEKLYHOURS", tempHours);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    void UpdatePhaseTotalHours(int PhaseID, double tempHours)
+    {
+        var sql = "UPDATE PHASE SET TOTALPERSONHOURS = @TOTALHOURS WHERE ID = @ID";
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source=projectDB");
+            connection.Open();
+
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@ID", PhaseID);
+            command.Parameters.AddWithValue("@TOTALHOURS", tempHours);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }

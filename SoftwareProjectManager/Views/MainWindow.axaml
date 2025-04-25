@@ -3,6 +3,7 @@
         xmlns:vm="using:SoftwareProjectManager.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:src.Models"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         Width="1280"
         Height="720"
@@ -41,11 +42,13 @@
                 <TextBlock Text="Projects:" FontFamily="{StaticResource Nunito}" FontSize="24"
                            HorizontalAlignment="Right"/>
                 <Button Content="+" HorizontalAlignment="Right" Margin = "0 0 -250 0" MaxWidth="27"
-                        Command="{Binding EnableProjectCommand}"/>
+                        Command="{Binding AddProjectCommand}"/>
             </Panel>
             <Panel HorizontalAlignment="Left" Margin="825 0 0 0">
+                <UserControl x:Name="Root">
+
                 <!-- Create the Data Grid for the Projects -->
-                <DataGrid x:Name="DataGrid" ItemsSource="{Binding _userProjects}"
+                <DataGrid x:Name="DataGrid" ItemsSource="{Binding UserProjects}"
                           IsReadOnly="True"
                           CanUserReorderColumns="False"
                           CanUserResizeColumns="False"
@@ -53,32 +56,25 @@
                           GridLinesVisibility="All"
                           BorderThickness="10" BorderBrush="Transparent"
                           Background="Transparent"
-                          MaxWidth="400"
-                          MaxHeight="400"
+                          Width="400"
+                          Height="400"
                           FontSize="12">
-
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="View"/>
+                                    <Button Content="View" Command="{Binding ViewProject}"
+                                            CommandParameter="{Binding .}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--
-                        <DataGridTextColumn Header="Title"  Binding="{Binding title}"
+                            
+                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}"
                                             FontSize="12"/>
-                        <DataGridTextColumn Header="Language" Binding="{Binding language}" />
-                        -->
                         
                     </DataGrid.Columns>
                 </DataGrid>
-            </Panel>
-            <Panel Margin = "0 0 280 0">
-                <TextBox Watermark="Project Name... " Text="{Binding NewProjectName}" IsEnabled="{Binding IsAddingProject}"
-                         HorizontalAlignment="Right" MaxWidth="125" MinWidth="125"/>
-                <Button Content="Add" HorizontalAlignment="Right" Margin="0 0 -210 0" MaxWidth="50"
-                        IsEnabled="{Binding IsAddingProject}" Command="{Binding AddProjectCommand}"/>
+                </UserControl>
             </Panel>
             
         </StackPanel>
