@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/SoftwareProjectManager.csproj": {}
+    "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\SoftwareProjectManager.csproj": {}
   },
   "projects": {
-    "/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/SoftwareProjectManager.csproj": {
+    "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\SoftwareProjectManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/SoftwareProjectManager.csproj",
+        "projectUniqueName": "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\SoftwareProjectManager.csproj",
         "projectName": "SoftwareProjectManager",
-        "projectPath": "/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/SoftwareProjectManager.csproj",
-        "packagesPath": "/Users/jared/.nuget/packages/",
-        "outputPath": "/Users/jared/RiderProjects/final_project_management/SoftwareProjectManager/obj/",
+        "projectPath": "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\SoftwareProjectManager.csproj",
+        "packagesPath": "C:\\Users\\10jon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/jared/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\10jon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,13 +34,7 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -105,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
