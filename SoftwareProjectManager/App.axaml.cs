@@ -19,9 +19,9 @@ public partial class App : Application
         Batteries.Init();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new ProductivityWindow()
+            desktop.MainWindow = new LoginWindow()
             {
-                DataContext = new ProductivityWindowViewModel()
+                DataContext = new LoginWindowViewModel()
             };
         }
 

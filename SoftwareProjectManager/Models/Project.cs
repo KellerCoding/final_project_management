@@ -62,6 +62,20 @@ public class Project
             desktop.MainWindow.Show();
         }
     }
+    
+    public void ViewEmployees(Project tempProject)
+    {
+                
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new EmployeeWindow()
+            {
+                DataContext = new EmployeeWindowViewModel(tempProject)
+            };
+                    
+            desktop.MainWindow.Show();
+        }
+    }
 
     public int GetID()
     {

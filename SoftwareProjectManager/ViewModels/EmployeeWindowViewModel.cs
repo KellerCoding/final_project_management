@@ -19,11 +19,12 @@ namespace SoftwareProjectManager.ViewModels;
 
 public class EmployeeWindowViewModel : ViewModelBase
 {
-    private static Project _project = new Project(2,"no","no");
+    //private static Project _project = new Project(2,"no","no");
     public ObservableCollection<Employee>? Employees { get; set; }
 
+    public EmployeeWindowViewModel(){}
     
-    public EmployeeWindowViewModel()
+    public EmployeeWindowViewModel(Project _project)
     {
         Employee Kahmin = new Employee(6, "Kahmin Keller", "Project Manager");
         Employee RJ = new Employee(7, "RJ Straiton", "Programmer");
@@ -74,7 +75,6 @@ public class EmployeeWindowViewModel : ViewModelBase
         foreach (Employee em in emp)
         {
             Console.WriteLine(em.ToString()+"\n");
-            Console.WriteLine(_project.GetPhase(1)[1]);
         }
     }
     

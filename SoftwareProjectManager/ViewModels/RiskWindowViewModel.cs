@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Data.Sqlite;
 using ReactiveUI;
+using SoftwareProjectManager.Models;
 using SoftwareProjectManager.Views;
 using src.Models;
 

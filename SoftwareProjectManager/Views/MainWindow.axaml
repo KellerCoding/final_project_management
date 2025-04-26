@@ -76,8 +76,16 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Emps" Command="{Binding ViewEmployees}"
+                                            CommandParameter="{Binding .}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                             
-                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}" Width="280"/>
+                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}" Width="240"/>
                         
                     </DataGrid.Columns>
                 </DataGrid>
