@@ -23,8 +23,12 @@
                         <Button Content="NonFunctional Requirements" IsEnabled="False"
                                 HorizontalAlignment="Left" Margin="200 15 0 0"/>
                 </Panel>
+                <Separator/>
                 <Panel>
-                        <TextBlock Text="{Binding Title, StringFormat='Project: {0}'}"/>
+                        <TextBlock Text="{Binding Title, StringFormat='Project: {0}'}"
+                                   FontFamily="{StaticResource Nunito}" FontSize="24" HorizontalAlignment="Center"/>
+                        <Button Content="Home" Command="{Binding HomeCommand}" HorizontalAlignment="Right"
+                                Margin = "40 0" FontFamily="{StaticResource Nunito}"/>
                 </Panel>
                 <Panel HorizontalAlignment="Center" VerticalAlignment="Bottom">
                         <DataGrid x:Name="DataGrid" ItemsSource="{Binding Requirements}"
