@@ -17,21 +17,18 @@
         <StackPanel>
                 <Panel HorizontalAlignment="Center">
                         <!-- Will assign the second button a command that will swap to counterpart screen -->
-                        <Button Content="Functional Requirements" IsEnabled="False" FontFamily="{StaticResource Nunito}"
+                        <Button Content="Functional Requirements" IsEnabled="False"
                                 HorizontalAlignment="Left" Margin="0 15 200 0"/>
-                        <Button Content="NonFunctional Requirements" FontFamily="{StaticResource Nunito}"
+                        <Button Content="NonFunctional Requirements"
                                 HorizontalAlignment="Right" Margin="200 15 0 0"
                                 Command="{Binding SwitchRequirementsCommand}"/>
-                        
                 </Panel>
                 <Separator/>
                 <Panel>
-                        <TextBlock Text="{Binding Title,
-                        StringFormat='Project: {0}'}" FontSize="24" FontFamily="{StaticResource Nunito}"
-                                   HorizontalAlignment="Center"/>
-                        <Button Content="Home" Command="{Binding HomeCommand}"
-                                HorizontalAlignment="Right" Margin = "100 15"/>
-                        
+                        <TextBlock Text="{Binding Title, StringFormat='Project: {0}'}"
+                                   HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource Nunito}"/>
+                        <Button Content="Home" Command="{Binding HomeCommand}" HorizontalAlignment="Right"
+                                Margin = "40 0" FontFamily="{StaticResource Nunito}"/>
                 </Panel>
                 
                 <Panel HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -43,16 +40,16 @@
                                   GridLinesVisibility="All"
                                   BorderThickness="10" BorderBrush="Transparent"
                                   Background="Transparent"
-                                  Width="1000"
+                                  Width="1050"
                                   Height="500"
                                   >
 
                                 <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Width="50" Binding="{Binding ID}"/>
-                                        <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}" />
-                                        <DataGridTextColumn Header="Description" Width="600" Binding="{Binding Description}"/>
-                                        <DataGridTextColumn Header="Priority" Width="100" Binding="{Binding Priority}"/>
-                                        <DataGridCheckBoxColumn Header="Status" Width="30" Binding = "{Binding Finished}"/>
+                                        <DataGridTextColumn Header="ID"  Width="60" Binding="{Binding ID}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridTextColumn Header="Name" Width="300" Binding="{Binding Name}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridTextColumn Header="Description" Width="500" Binding="{Binding Description}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridTextColumn Header="Priority" Width="75" Binding="{Binding Priority}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridCheckBoxColumn Header="Status" Width="75" Binding = "{Binding Finished}"/>
                                 </DataGrid.Columns>
                         </DataGrid>
                 </Panel>

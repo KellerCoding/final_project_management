@@ -7,18 +7,17 @@ namespace src.Models;
 
 public class Risk
 {
-    private int ID;
-    public int id { get; set; }
+    public int ID {get; set;}
     public int ProjectId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public ObservableCollection<Risk> RisksListCollection { get; set; } = new();
-    public Risk(int tempId,string tempName, string tempDescription,int projectID)
+    public Risk(int tempId,string tempName, string tempDescription, int tempProjectId)
     {
-        id = tempId;
+        ID = tempId;
         Name = tempName;
         Description = tempDescription;
-        ProjectId = projectID;
+        ProjectId = tempProjectId;
     }
 
     public Risk()
@@ -78,12 +77,12 @@ public class Risk
 
             while (reader.Read())
             {
-                id = reader.GetInt32(0);
+                ID = reader.GetInt32(0);
                 Name = reader.GetString(1);
                 Description = reader.GetString(2);
                 ProjectId = reader.GetInt16(3);
                 //Console.WriteLine(id + " " + Name  + " " +  Description + " " +  ProjectID);
-                RisksListCollection.Add(new Risk(id,Name,Description,ProjectId));
+                RisksListCollection.Add(new Risk(ID,Name,Description,ProjectId));
             }
         }
         catch (Exception e)
@@ -105,11 +104,11 @@ public class Risk
 
             while (reader.Read())
             {
-                id = reader.GetInt32(0);
+                ID = reader.GetInt32(0);
                 Name = reader.GetString(1);
                 Description = reader.GetString(2);
                 ProjectId = reader.GetInt16(3);
-                RisksListCollection.Add(new Risk(id,Name,Description,ProjectId));
+                RisksListCollection.Add(new Risk(ID,Name,Description,ProjectId));
             }
         }
         catch (Exception e)

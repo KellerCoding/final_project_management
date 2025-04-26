@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Microsoft.Data.Sqlite;
@@ -35,14 +36,26 @@ public class Project
 
     public void ViewProject(Project tempProject)
     {
-        Console.WriteLine(tempProject.GetID());
-
                 
         if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new FunctionalRequirementsWindow()
             {
                 DataContext = new FunctionalRequirementsViewModel(tempProject)
+            };
+                    
+            desktop.MainWindow.Show();
+        }
+    }
+    
+    public void ViewRisks(Project tempProject)
+    {
+                
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new RiskWindowView()
+            {
+                DataContext = new RiskWindowViewModel(tempProject)
             };
                     
             desktop.MainWindow.Show();
@@ -86,7 +99,171 @@ public class Project
         ArrayList tempArrayList = new ArrayList();
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
+    }
+    
+    //Pretty much the same method with new parameter for the relevant ID
+    ArrayList DatabaseCall(string sql, int tempID)
+    {
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@ID",tempID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
+    }
+    //Fetch one row from table, returns arraylist with 1? element, takes in an ID from the user
+    public ArrayList GetTeamMember(int tempID)
+    {
+        string sql = "Select * from EMPLOYEE where ID = @ID";
+        return DatabaseCall(sql, tempID);
+    }
+    public ArrayList GetPhase(int tempID)
+    {
+        string sql = "Select * from PHASE where ID = @ID";
+        return DatabaseCall(sql, tempID);
+    }
+    
+    public ArrayList GetFunctionalReq(int tempID)
+    {
+        string sql = "Select * from FREQUIREMENT where ID = @ID";
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@ID",tempID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
+    }
+    
+    public ArrayList GetNonFunctionalReq(int tempID)
+    {
+        string sql = "Select * from NFREQUIREMENT where ID = @ID";
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@ID",tempID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
+    }
+    
+    public ArrayList GetRisk(int tempID)
+    {
+        string sql = "Select * from RISK where ID = @ID";
+        return DatabaseCall(sql, tempID);
+    }
+    //Fetch all related data
+    public ArrayList GetTeamMembers()
+    {
+        var sql = "Select * from EMPLOYEE where PROJECTID = @PROJECTID";
+        return DatabaseCall(sql);
+    }
+    public ArrayList GetPhases()
+    {
+        string sql = "Select * from PHASE where PROJECTID = @PROJECTID";
+        return DatabaseCall(sql);
+    }
+    
+    public ArrayList GetFunctionalReqs()
+    {
+        var sql = "Select * from FREQUIREMENT where PROJECTID = @PROJECTID";
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
             
             using var command = new SqliteCommand(sql,connection);
@@ -116,17 +293,17 @@ public class Project
         return tempArrayList;
     }
     
-    //Pretty much the same method with new parameter for the relevant ID
-    ArrayList DatabaseCall(string sql, int tempID)
+    public ArrayList GetNonFunctionalReqs()
     {
+        var sql = "Select * from NFRequirement where PROJECTID = @PROJECTID";
         ArrayList tempArrayList = new ArrayList();
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
             
             using var command = new SqliteCommand(sql,connection);
-            command.Parameters.AddWithValue("@ID",tempID);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
             
             using var reader = command.ExecuteReader();
             if (reader.HasRows)
@@ -138,6 +315,7 @@ public class Project
                     tempArrayList.Add(reader.GetString(2));
                     tempArrayList.Add(reader.GetString(3));
                     tempArrayList.Add(reader.GetString(4));
+
                 }
             }
             connection.Close();
@@ -150,63 +328,40 @@ public class Project
 
         return tempArrayList;
     }
-    //Fetch one row from table, returns arraylist with 1? element, takes in an ID from the user
-    public ArrayList GetTeamMember(int tempID)
-    {
-        string sql = "Select * from EMPLOYEE where ID = @ID";
-        return DatabaseCall(sql, tempID);
-    }
-    public ArrayList GetPhase(int tempID)
-    {
-        string sql = "Select * from PHASE where ID = @ID";
-        return DatabaseCall(sql, tempID);
-    }
-    
-    public ArrayList GetFunctionalReq(int tempID)
-    {
-        string sql = "Select * from FREQUIREMENT where ID = @ID";
-        return DatabaseCall(sql, tempID);
-    }
-    
-    public ArrayList GetNonFunctionalReq(int tempID)
-    {
-        string sql = "Select * from NFREQUIREMENT where ID = @ID";
-        return DatabaseCall(sql, tempID);
-    }
-    
-    public ArrayList GetRisk(int tempID)
-    {
-        string sql = "Select * from RISK where ID = @ID";
-        return DatabaseCall(sql, tempID);
-    }
-    //Fetch all related data
-    public ArrayList GetTeamMembers()
-    {
-        var sql = "Select * from EMPLOYEE where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
-    }
-    public ArrayList GetPhases()
-    {
-        string sql = "Select * from PHASE where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
-    }
-    
-    public ArrayList GetFunctionalReqs()
-    {
-        var sql = "Select * from FREQUIREMENT where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
-    }
-    
-    public ArrayList GetNonFunctionalReqs()
-    {
-        var sql = "Select * from NFRequirement where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
-    }
     
     public ArrayList GetRisks()
     {
         var sql = "Select * from RISK where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     //Inserting values into the database
@@ -216,7 +371,7 @@ public class Project
                   "VALUES (@ID, @NAME, @JOB_TITLE, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -241,7 +396,7 @@ public class Project
                   "VALUES (@ID, @NAME, @DESCR, @WEEKLYPERSONHOURS, @TOTALPERSONHOURS, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -269,7 +424,7 @@ public class Project
                   "VALUES (@ID, @NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -296,7 +451,7 @@ public class Project
                   "VALUES (@ID,@NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -317,13 +472,13 @@ public class Project
         }
     }
 
-    void AddRisk(Risk temp)
+    public void AddRisk(Risk temp)
     {
         var sql = "INSERT INTO RISK (ID, NAME, DESCR, PROJECTID) " +
                   "VALUES (@ID, @NAME, @DESCR, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -350,7 +505,7 @@ public class Project
     {
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -369,7 +524,7 @@ public class Project
     {
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -413,7 +568,7 @@ public class Project
         var sql = "UPDATE PHASE SET WEEKLYPERSONHOURS = @WEEKLYHOURS WHERE ID = @ID";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -434,7 +589,7 @@ public class Project
         var sql = "UPDATE PHASE SET TOTALPERSONHOURS = @TOTALHOURS WHERE ID = @ID";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -450,4 +605,16 @@ public class Project
             throw;
         }
     }
+    public static string GetDatabasePath()
+    {
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        
+        string projectRoot = Path.GetFullPath(Path.Combine(baseDirectory, "../../.."));
+    
+        string dbPath = Path.Combine(projectRoot, "projectDB");
+    
+        //Console.WriteLine("database at:" + dbPath);
+        return dbPath;
+    }
+    
 }

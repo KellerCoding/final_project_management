@@ -9,8 +9,8 @@ public class Requirement
     public int ID {get; set;}
     public int Priority {get; set;}
     public string Name {get; set;}
-    private string Description {get; set;}
-    private bool Finished {get; set;}
+    public string Description {get; set;}
+    public bool Finished {get; set;}
     //Arraylist of sub-requirements attached to existing requirement
     private ArrayList Children;
 

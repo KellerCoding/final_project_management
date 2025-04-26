@@ -35,16 +35,16 @@
                                   GridLinesVisibility="All"
                                   BorderThickness="10" BorderBrush="Transparent"
                                   Background="Transparent"
-                                  Width="1000"
+                                  Width="1050"
                                   Height="500"
                                   >
 
                                 <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID"  Binding="{Binding ID}" FontSize="12"/>
-                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                                        <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"></DataGridTextColumn>
-                                        <DataGridCheckBoxColumn Header="Status" Binding = "{Binding Finished}"/>
+                                        <DataGridTextColumn Header="ID"  Width="60" Binding="{Binding ID}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridTextColumn Header="Name" Width="300" Binding="{Binding Name}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridTextColumn Header="Description" Width="500" Binding="{Binding Description}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridTextColumn Header="Priority" Width="75" Binding="{Binding Priority}" FontFamily="{StaticResource Nunito}"/>
+                                        <DataGridCheckBoxColumn Header="Status" Width="75" Binding = "{Binding Finished}"/>
                                 </DataGrid.Columns>
                         </DataGrid>
                 </Panel>

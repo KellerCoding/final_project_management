@@ -41,7 +41,7 @@
                            FontFamily="{StaticResource Nunito}" FontSize="24"/>
                 <TextBlock Text="Projects:" FontFamily="{StaticResource Nunito}" FontSize="24"
                            HorizontalAlignment="Right"/>
-                <Button Content="+" HorizontalAlignment="Right" Margin = "0 0 -250 0" MaxWidth="27"
+                <Button Content="+" HorizontalAlignment="Right" Margin = "0 0 -290 0" MaxWidth="27"
                         Command="{Binding AddProjectCommand}"/>
             </Panel>
             <Panel HorizontalAlignment="Left" Margin="825 0 0 0">
@@ -60,30 +60,24 @@
                           Height="400"
                           FontSize="12">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="60">
+                        <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="Reqs" Command="{Binding ViewProject}"
-                                            CommandParameter="{Binding .}" HorizontalAlignment="Center"/>
+                                            CommandParameter="{Binding .}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
-                        <DataGridTemplateColumn Width="60">
+                        <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Risks" Command="{Binding ViewProject}"
-                                            CommandParameter="{Binding .}" HorizontalAlignment="Center"/>
+                                    <Button Content="Risks" Command="{Binding ViewRisks}"
+                                            CommandParameter="{Binding .}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                             
-<<<<<<< HEAD
-                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}" Width="300"/>
-=======
-                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}"
-                                            FontSize="12"/>
->>>>>>> origin/main
+                        <DataGridTextColumn Header="Title"  Binding="{Binding Name}" Width="280"/>
                         
                     </DataGrid.Columns>
                 </DataGrid>
