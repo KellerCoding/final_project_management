@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:SoftwareProjectManager.ViewModels"
+        x:DataType="vm:EmployeeWindowViewModel"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width = "1280"
+        Height = "720"
+        x:Class="SoftwareProjectManager.Views.EmployeeWindow"
+        Title="SPM Employee"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/SPM icon.ico"
+        >
+        
+        <Panel>
+                <Panel Margin="0 20">
+                        <TextBlock Text="Software Project Manager" FontFamily="{StaticResource Nunito}" FontSize="30" 
+                                   HorizontalAlignment="Center"/>
+                        <Border Padding = "30">
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                        <DataGrid x:Name="DataGrid" ItemsSource="{Binding Employees}"
+                                                  IsReadOnly="True"
+                                                  CanUserReorderColumns="False"
+                                                  CanUserResizeColumns="False"
+                                                  CanUserSortColumns="True"
+                                                  GridLinesVisibility="All"
+                                                  BorderThickness="10" BorderBrush="Transparent"
+                                                  Background="Transparent"
+                                                  Width="1000"
+                                                  Height="1000"
+                                                  FontSize="12">
+                                                <DataGrid.Columns>
+                            
+                                                        <DataGridTextColumn Header="Name"  Binding="{Binding Name}"
+                                                                            FontSize="12"/>
+                                                        <DataGridTextColumn Header="Job Title" Binding="{Binding JobTitle}"
+                                                                            FontSize="12"/>
+                                                        <DataGridTextColumn Header="ID" Binding="{Binding ID}"
+                                                                            FontSize="12"/>
+                        
+                                                </DataGrid.Columns>
+                                        </DataGrid>
+                                </StackPanel>
+                        </Border>
+                </Panel>
+        </Panel>
+</Window>

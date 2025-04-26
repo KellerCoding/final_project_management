@@ -2,11 +2,19 @@ namespace src.Models;
 
 public class Phase
 {
-    private int ID;
-    private string Name;
-    private string Description;
-    private double WeeklyPersonHours;
-    private double TotalPersonHours;
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public double WeeklyPersonHours { get; set; }
+    public double TotalPersonHours { get; set; }
+
+    public Phase(int ID, string name, int weeklyHours, int totalHours)
+    {
+        this.ID = ID;
+        Name = name;
+        WeeklyPersonHours = weeklyHours;
+        TotalPersonHours = totalHours;
+    }
 
     public Phase(int tempID, string tempName, string tempDesc)
     {

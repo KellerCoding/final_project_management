@@ -4,9 +4,9 @@ namespace src.Models;
 
 public class Employee
 {
-    private int ID;
-    private string Name;
-    private string JobTitle;
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string JobTitle { get; set; }
     private SqliteConnection sqliteConnection;
 
     public Employee(int tempID, string tempName, string tempJob)

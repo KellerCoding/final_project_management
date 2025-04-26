@@ -6,9 +6,10 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Microsoft.Data.Sqlite;
 using SoftwareProjectManager.ViewModels;
 using SoftwareProjectManager.Views;
+using src.Models;
 using Tmds.DBus.Protocol;
 
-namespace src.Models;
+namespace SoftwareProjectManager.Models;
 
 public class Project
 {
@@ -56,6 +57,20 @@ public class Project
             desktop.MainWindow = new RiskWindowView()
             {
                 DataContext = new RiskWindowViewModel(tempProject)
+            };
+                    
+            desktop.MainWindow.Show();
+        }
+    }
+    
+    public void ViewEmployees(Project tempProject)
+    {
+                
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new EmployeeWindow()
+            {
+                DataContext = new EmployeeWindowViewModel(tempProject)
             };
                     
             desktop.MainWindow.Show();
@@ -249,12 +264,68 @@ public class Project
     public ArrayList GetTeamMembers()
     {
         var sql = "Select * from EMPLOYEE where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;;
     }
     public ArrayList GetPhases()
     {
-        string sql = "Select * from PHASE where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        var sql = "Select * from PHASE where PROJECTID = @PROJECTID";
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     public ArrayList GetFunctionalReqs()
@@ -365,7 +436,7 @@ public class Project
     }
     
     //Inserting values into the database
-    void AddEmployee(Employee temp)
+    public void AddEmployee(Employee temp)
     {
         var sql = "INSERT INTO EMPLOYEE (ID, NAME, JOB_TITLE, PROJECTID) " +
                   "VALUES (@ID, @NAME, @JOB_TITLE, @PROJECTID)";
@@ -390,7 +461,7 @@ public class Project
         }
     }
     
-    void AddPhase(Phase temp)
+    public void AddPhase(Phase temp)
     {
         var sql = "INSERT INTO PHASE (ID, NAME, DESCR, WEEKLYPERSONHOURS, TOTALPERSONHOURS, PROJECTID) " +
                   "VALUES (@ID, @NAME, @DESCR, @WEEKLYPERSONHOURS, @TOTALPERSONHOURS, @PROJECTID)";
@@ -406,7 +477,7 @@ public class Project
             command.Parameters.AddWithValue("@DESCR", temp.GetDescription());
             //can't pass a double??
             command.Parameters.Add("@WEEKLYPERSONHOURS", 0);
-            command.Parameters.Add("TOTALPERSONHOURS", 0);
+            command.Parameters.Add("@TOTALPERSONHOURS", 0);
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -563,7 +634,7 @@ public class Project
         UpdateTable(sql, FuntionalReqID, tempPriority);
     }
     
-    void UpdatePhaseWeeklyHours(int PhaseID, double tempHours)
+    public void UpdatePhaseWeeklyHours(int PhaseID, double tempHours)
     {
         var sql = "UPDATE PHASE SET WEEKLYPERSONHOURS = @WEEKLYHOURS WHERE ID = @ID";
         try
@@ -584,7 +655,7 @@ public class Project
             throw;
         }
     }
-    void UpdatePhaseTotalHours(int PhaseID, double tempHours)
+    public void UpdatePhaseTotalHours(int PhaseID, double tempHours)
     {
         var sql = "UPDATE PHASE SET TOTALPERSONHOURS = @TOTALHOURS WHERE ID = @ID";
         try
@@ -605,6 +676,7 @@ public class Project
             throw;
         }
     }
+    
     public static string GetDatabasePath()
     {
         string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -616,5 +688,4 @@ public class Project
         //Console.WriteLine("database at:" + dbPath);
         return dbPath;
     }
-    
 }

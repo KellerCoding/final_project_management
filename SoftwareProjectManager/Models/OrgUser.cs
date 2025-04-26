@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections;
 using Microsoft.Data.Sqlite;
+using SoftwareProjectManager.Models;
 
 namespace src.Models;
 

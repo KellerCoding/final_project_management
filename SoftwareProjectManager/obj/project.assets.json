@@ -2104,26 +2104,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\10jon\\.nuget\\packages\\": {}
+    "C:\\Users\\final\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\SoftwareProjectManager.csproj",
+      "projectUniqueName": "C:\\Users\\final\\Projects\\final_project_management\\SoftwareProjectManager\\SoftwareProjectManager.csproj",
       "projectName": "SoftwareProjectManager",
-      "projectPath": "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\SoftwareProjectManager.csproj",
-      "packagesPath": "C:\\Users\\10jon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\10jon\\OneDrive\\Desktop\\CS Labs & Assignments\\FinalSPM\\final\\SoftwareProjectManager\\obj\\",
+      "projectPath": "C:\\Users\\final\\Projects\\final_project_management\\SoftwareProjectManager\\SoftwareProjectManager.csproj",
+      "packagesPath": "C:\\Users\\final\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\final\\Projects\\final_project_management\\SoftwareProjectManager\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\10jon\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\final\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2136,7 +2134,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -2203,7 +2207,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\final\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
