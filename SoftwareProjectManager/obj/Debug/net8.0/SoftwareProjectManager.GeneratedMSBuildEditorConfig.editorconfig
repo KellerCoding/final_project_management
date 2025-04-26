@@ -50,6 +50,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/NonFunctionalRequirementsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/ProductivityWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/final/Projects/final_project_management/SoftwareProjectManager/Views/RiskWindowView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

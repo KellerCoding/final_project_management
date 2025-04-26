@@ -1,0 +1,63 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SoftwareProjectManager.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="1280"
+        Height="720"
+        x:Class="SoftwareProjectManager.Views.ProductivityWindow"
+        x:DataType="vm:ProductivityWindowViewModel"
+        Icon="/Assets/SPM icon.ico"
+        Title="Software Project Manager"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Border>
+        <StackPanel Margin = "20">
+            <Panel>
+                <!-- Handles all elements above the horizontal line (separator) at the top of the screen -->    
+                <TextBlock Text="Software Project Manager" FontFamily="{StaticResource Nunito}" HorizontalAlignment="Left" 
+                           VerticalAlignment="Top" FontSize="24"/>
+                <Border Padding="30">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <DataGrid x:Name="DataGrid" ItemsSource="{Binding phases}"
+                            IsReadOnly="True"
+                            CanUserReorderColumns="False"
+                            CanUserResizeColumns="False"
+                            CanUserSortColumns="True"
+                            GridLinesVisibility="All"
+                            BorderThickness="10" BorderBrush="Transparent"
+                            Background="Transparent"
+                            Width="1000"
+                            Height="1000"
+                            FontSize="12">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="name" Binding="{Binding Name}"
+                                                    FontSize="12"/>
+                                <DataGridTextColumn Header="Weekly Person Hours" Binding="{Binding WeeklyPersonHours}"
+                                                    FontSize="12"/>
+                                <DataGridTextColumn Header="Total Person Hours" Binding="{Binding TotalPersonHours}"
+                                                    FontSize="12"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+                
+            </Panel>
+            
+        </StackPanel>
+        
+        
+
+    </Border>
+
+</Window>

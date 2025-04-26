@@ -52,8 +52,7 @@ public class EmployeeWindowViewModel : ViewModelBase
         var jobTitle="";
         List<Employee> emp = new List<Employee>();
 
-        try
-        {
+      
             int i = 0;
             while(i<hold.Count-2)
             {
@@ -68,20 +67,14 @@ public class EmployeeWindowViewModel : ViewModelBase
                 
             }
 
-            ;
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-
-
+       
+        
 
         Employees = new ObservableCollection<Employee>(emp);
         foreach (Employee em in emp)
         {
             Console.WriteLine(em.ToString()+"\n");
+            Console.WriteLine(_project.GetPhase(1)[1]);
         }
     }
     

@@ -210,8 +210,36 @@ public class Project
     }
     public ArrayList GetPhases()
     {
-        string sql = "Select * from PHASE where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        var sql = "Select * from PHASE where PROJECTID = @PROJECTID";
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     public ArrayList GetFunctionalReqs()
@@ -258,13 +286,13 @@ public class Project
         }
     }
     
-    void AddPhase(Phase temp)
+    public void AddPhase(Phase temp)
     {
         var sql = "INSERT INTO PHASE (ID, NAME, DESCR, WEEKLYPERSONHOURS, TOTALPERSONHOURS, PROJECTID) " +
                   "VALUES (@ID, @NAME, @DESCR, @WEEKLYPERSONHOURS, @TOTALPERSONHOURS, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -274,7 +302,7 @@ public class Project
             command.Parameters.AddWithValue("@DESCR", temp.GetDescription());
             //can't pass a double??
             command.Parameters.Add("@WEEKLYPERSONHOURS", 0);
-            command.Parameters.Add("TOTALPERSONHOURS", 0);
+            command.Parameters.Add("@TOTALPERSONHOURS", 0);
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -292,7 +320,7 @@ public class Project
                   "VALUES (@ID, @NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -319,7 +347,7 @@ public class Project
                   "VALUES (@ID,@NAME, @DESCR, @STATUS, @PRIOIRTY, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -346,7 +374,7 @@ public class Project
                   "VALUES (@ID, @NAME, @DESCR, @PROJECTID)";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -373,7 +401,7 @@ public class Project
     {
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -392,7 +420,7 @@ public class Project
     {
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -431,12 +459,12 @@ public class Project
         UpdateTable(sql, FuntionalReqID, tempPriority);
     }
     
-    void UpdatePhaseWeeklyHours(int PhaseID, double tempHours)
+    public void UpdatePhaseWeeklyHours(int PhaseID, double tempHours)
     {
         var sql = "UPDATE PHASE SET WEEKLYPERSONHOURS = @WEEKLYHOURS WHERE ID = @ID";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
@@ -452,12 +480,12 @@ public class Project
             throw;
         }
     }
-    void UpdatePhaseTotalHours(int PhaseID, double tempHours)
+    public void UpdatePhaseTotalHours(int PhaseID, double tempHours)
     {
         var sql = "UPDATE PHASE SET TOTALPERSONHOURS = @TOTALHOURS WHERE ID = @ID";
         try
         {
-            using var connection = new SqliteConnection($"Data Source=projectDB");
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
             connection.Open();
 
             using var command = new SqliteCommand(sql, connection);
