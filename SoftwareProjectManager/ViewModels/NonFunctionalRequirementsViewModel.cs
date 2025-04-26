@@ -52,7 +52,6 @@ public class NonFunctionalRequirementsViewModel : ViewModelBase
             {
                 Requirement newReq = new Requirement(Convert.ToInt32(reqData[i]), Convert.ToString(reqData[i+1]), Convert.ToString(reqData[i+2]), Convert.ToInt32(reqData[i+4]));
                 Requirements.Add(newReq);
-
             }
         }
 

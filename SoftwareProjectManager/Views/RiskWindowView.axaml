@@ -8,7 +8,7 @@
         x:DataType="viewModels:RiskWindowViewModel"
         Title="Risk Management"
         TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent"
+        Background="DimGray"
         ExtendClientAreaToDecorationsHint="False"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>

@@ -10,7 +10,7 @@
         x:Class="SoftwareProjectManager.Views.EmployeeWindow"
         Title="SPM Employee"
         TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent"
+        Background="DimGray"
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/SPM icon.ico"

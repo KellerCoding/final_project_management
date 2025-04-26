@@ -9,7 +9,7 @@
         x:Class="SoftwareProjectManager.Views.AddProjectWindow"
         Title="Add Project"
         TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent"
+        Background="DimGray"
         ExtendClientAreaToDecorationsHint="False"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/SPM icon.ico">

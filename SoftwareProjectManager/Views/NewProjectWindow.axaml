@@ -8,7 +8,7 @@
         x:DataType="vm:NewProjectViewModel"
         Title=""
         TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent"
+        Background="DimGray"
         ExtendClientAreaToDecorationsHint="False"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/SPM icon.ico"

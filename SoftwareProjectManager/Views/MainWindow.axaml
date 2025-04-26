@@ -12,7 +12,7 @@
         Icon="/Assets/SPM icon.ico"
         Title="Software Project Manager"
         TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent"
+        Background="DimGray"
         ExtendClientAreaToDecorationsHint="False"
         WindowStartupLocation="CenterScreen">
 
