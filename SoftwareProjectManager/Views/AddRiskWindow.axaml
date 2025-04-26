@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:SoftwareProjectManager.ViewModels"
+        x:DataType="vm:AddRiskViewModel"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="300" Height="450"
+        x:Class="SoftwareProjectManager.Views.AddRiskWindow"
+        Title="Add Risk"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/SPM icon.ico">
+        
+        <StackPanel>
+                <Panel Margin="0 15">
+                        <TextBox Watermark="Risk Name..." Text="{Binding RiskName}"
+                                 FontFamily="{StaticResource Nunito}" Width="250" HorizontalAlignment="Center"/>
+                </Panel>
+                <Panel Margin="0 15">
+                        <TextBox Watermark="Description..." Text="{Binding RiskDescription}"
+                                 FontFamily="{StaticResource Nunito}" Width="250" HorizontalAlignment="Center"/>
+                </Panel>
+                <Panel Margin="0 15">
+                        <TextBox Watermark="Enter Valid Id..." Text="{Binding TempId}"
+                                 FontFamily="{StaticResource Nunito}" Width="250" HorizontalAlignment="Center"/>
+                </Panel>
+                <Panel Margin="0 15">
+                        <TextBlock Text="{Binding ErrorMessage}"
+                                   FontFamily="{StaticResource Nunito}" HorizontalAlignment="Center"/>
+                </Panel>
+                <Panel Margin="0 15">
+                        <Button Content="Add Project" Command="{Binding AddRiskCommand}"
+                                HorizontalAlignment="Center"/>
+                </Panel>
+        </StackPanel>
+        
+</Window>

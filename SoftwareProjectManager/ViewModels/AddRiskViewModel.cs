@@ -5,39 +5,38 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using ReactiveUI;
-using SoftwareProjectManager.Models;
 using SoftwareProjectManager.Views;
 using src.Models;
 
 namespace SoftwareProjectManager.ViewModels;
 
-public class AddProjectViewModel : ViewModelBase
+public class AddRiskViewModel : ViewModelBase
 {
-    public ICommand AddProjectCommand { get; set; }
+    public ICommand AddRiskCommand { get; set; }
     
-    private string? _projectName = string.Empty;
-    private string? _projectDescription = string.Empty;
+    private string? _riskName = string.Empty;
+    private string? _riskDescription = string.Empty;
     private string? _tempId = string.Empty;
     private string? _errorMessage = string.Empty;
 
     private int idConversion;
 
-    public string? ProjectName
+    public string? RiskName
     {
-        get => _projectName;
-        set => _projectName = value;
+        get => _riskName;
+        set => this.RaiseAndSetIfChanged(ref _riskName, value);
     }
 
-    public string? ProjectDescription
+    public string? RiskDescription
     {
-        get => _projectDescription;
-        set => _projectDescription = value;
+        get => _riskDescription;
+        set => this.RaiseAndSetIfChanged(ref _riskDescription, value);
     }
 
     public string? TempId
     {
         get => _tempId;
-        set => _tempId = value;
+        set => this.RaiseAndSetIfChanged(ref _tempId, value);
     }
 
     public string? ErrorMessage
@@ -46,28 +45,31 @@ public class AddProjectViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
     }
 
-    public AddProjectViewModel()
+    public AddRiskViewModel()
     {
         
     }
 
-    public AddProjectViewModel(OrgUser user, ObservableCollection<Project> projects)
+    public AddRiskViewModel(ObservableCollection<Risk> risks, Project project)
     {
-        AddProjectCommand = ReactiveCommand.Create(() =>
+        AddRiskCommand = ReactiveCommand.Create(() =>
         {
-            if (ProjectName.Length > 0 && ProjectDescription.Length > 0 && TempId.Length > 0)
+            if (RiskName.Length > 0 && RiskDescription.Length > 0 && TempId.Length > 0)
             {
-                if (ProjectName.Length <= 64 && ProjectDescription.Length <= 252 && TempId.Length < 10)
+                if (RiskName.Length <= 64 && RiskDescription.Length <= 252 && TempId.Length < 10)
                 {
                     try
                     {
                         idConversion = int.Parse(TempId);
                         ErrorMessage = "";
+                        Console.WriteLine(idConversion);
                         
-                        Project newProject = new Project(idConversion, ProjectName, ProjectDescription);
-                        // Place this line above the closing code.
-                        user.AddProject(newProject);
-                        projects.Add(newProject);
+                        
+                        Risk newRisk = new Risk(idConversion, RiskName, RiskDescription, project.GetID());
+                        project.AddRisk(newRisk);
+                        risks.Add(newRisk);
+
+                        Console.WriteLine(newRisk.GetID());
                         
                         var mainWindow =
                             (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)

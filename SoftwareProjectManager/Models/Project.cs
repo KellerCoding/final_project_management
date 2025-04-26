@@ -15,7 +15,7 @@ public class Project
 {
     //Attributes
     private int ID;
-    private string Name { get; set; }
+    public string Name { get; set; }
 
     private string Description;
     /*
@@ -37,14 +37,26 @@ public class Project
 
     public void ViewProject(Project tempProject)
     {
-        Console.WriteLine(tempProject.GetID());
-
                 
         if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new FunctionalRequirementsWindow()
             {
                 DataContext = new FunctionalRequirementsViewModel(tempProject)
+            };
+                    
+            desktop.MainWindow.Show();
+        }
+    }
+    
+    public void ViewRisks(Project tempProject)
+    {
+                
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new RiskWindowView()
+            {
+                DataContext = new RiskWindowViewModel(tempProject)
             };
                     
             desktop.MainWindow.Show();
@@ -160,13 +172,73 @@ public class Project
     public ArrayList GetFunctionalReq(int tempID)
     {
         string sql = "Select * from FREQUIREMENT where ID = @ID";
-        return DatabaseCall(sql, tempID);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@ID",tempID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     public ArrayList GetNonFunctionalReq(int tempID)
     {
         string sql = "Select * from NFREQUIREMENT where ID = @ID";
-        return DatabaseCall(sql, tempID);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@ID",tempID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     public ArrayList GetRisk(int tempID)
@@ -245,19 +317,108 @@ public class Project
     public ArrayList GetFunctionalReqs()
     {
         var sql = "Select * from FREQUIREMENT where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     public ArrayList GetNonFunctionalReqs()
     {
         var sql = "Select * from NFRequirement where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+                    tempArrayList.Add(reader.GetString(4));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     public ArrayList GetRisks()
     {
         var sql = "Select * from RISK where PROJECTID = @PROJECTID";
-        return DatabaseCall(sql);
+        ArrayList tempArrayList = new ArrayList();
+        try
+        {
+            using var connection = new SqliteConnection($"Data Source="+GetDatabasePath());
+            connection.Open();
+            
+            using var command = new SqliteCommand(sql,connection);
+            command.Parameters.AddWithValue("@PROJECTID",ID);
+            
+            using var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tempArrayList.Add(reader.GetString(0));
+                    tempArrayList.Add(reader.GetString(1));
+                    tempArrayList.Add(reader.GetString(2));
+                    tempArrayList.Add(reader.GetString(3));
+
+                }
+            }
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return tempArrayList;
     }
     
     //Inserting values into the database
@@ -368,7 +529,7 @@ public class Project
         }
     }
 
-    void AddRisk(Risk temp)
+    public void AddRisk(Risk temp)
     {
         var sql = "INSERT INTO RISK (ID, NAME, DESCR, PROJECTID) " +
                   "VALUES (@ID, @NAME, @DESCR, @PROJECTID)";

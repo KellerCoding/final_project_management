@@ -17,18 +17,25 @@ using src.Models;
 
 namespace SoftwareProjectManager.ViewModels;
 
-public class NonFunctionalRequirementsViewModel
+public class NonFunctionalRequirementsViewModel : ViewModelBase
 {
     public ICommand SwitchRequirementsCommand { get; }
+    public ICommand HomeCommand { get; }
     Project _project;
     public Project Project { get; }
     
     public string? Title { get; set; }
     public string? ID { get; set; }
     
-    private ArrayList _requirements = new ArrayList();
+    private ArrayList reqData = new ArrayList();
     
-    public ObservableCollection<Requirement> Requirements { get; }
+    private ObservableCollection<Requirement> _requirements = new ObservableCollection<Requirement>();
+
+    public ObservableCollection<Requirement> Requirements
+    {
+        get => _requirements;
+        set => this.RaiseAndSetIfChanged(ref _requirements, value);
+    }
     
 
     public NonFunctionalRequirementsViewModel(Project project)
@@ -36,13 +43,35 @@ public class NonFunctionalRequirementsViewModel
         Project = project;
         Title = Project.GetName();
         ID = Convert.ToString(Project.GetID());
+        
+        reqData = project.GetNonFunctionalReqs();
 
-        _requirements = Project.GetNonFunctionalReq(Project.GetID());
-
-        foreach (Requirement req in _requirements)
+        for (int i = 0; i < reqData.Count - 4; i++)
         {
-            Requirements.Add(req);
+            if (i % 5 == 0)
+            {
+                Requirement newReq = new Requirement(Convert.ToInt32(reqData[i]), Convert.ToString(reqData[i+1]), Convert.ToString(reqData[i+2]), Convert.ToInt32(reqData[i+4]));
+                Requirements.Add(newReq);
+
+            }
         }
+
+
+        HomeCommand = ReactiveCommand.Create(() =>
+        {
+            var mainWindow =
+                (Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
+                ?.MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.Hide();
+            }
+                        
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow = mainWindow;
+            }
+        });
 
         SwitchRequirementsCommand = ReactiveCommand.Create(() =>
         {

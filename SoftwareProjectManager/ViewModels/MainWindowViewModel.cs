@@ -38,7 +38,7 @@ public class MainWindowViewModel : ViewModelBase
     public ObservableCollection<Project>? UserProjects
     {
         get => _userProjects;
-        set => _userProjects = value;
+        set => this.RaiseAndSetIfChanged(ref _userProjects, value);
     }
 
 
@@ -55,27 +55,23 @@ public class MainWindowViewModel : ViewModelBase
 
         try
         {
-            UserProjects.Add(new Project(5, "temp", "temp"));
-            UserProjects.Add(new Project(6, "temp2", "temp2"));
-            UserProjects.Add(new Project(7, "temp3", "temp3"));
-            //projectNames = user.ViewProjects();
+            projectNames = user.ViewProjects();
+            for (int i = 0; i < projectNames.Count - 2; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    Project newProject = new Project(Convert.ToInt32(projectNames[i]), 
+                        Convert.ToString(projectNames[i+1]), Convert.ToString(projectNames[i+2]));
+                    UserProjects.Add(newProject);
+                }
+            }
         }
         catch (Exception e)
         {
 
         }
-
-        foreach (string project in projectNames)
-        {
-            try
-            {
-                _userProjects.Add(new Project(0, project, project));
-            }
-            catch (Exception e)
-            {
-                
-            }
-        }
+        
+        
         
         AddProjectCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -85,7 +81,7 @@ public class MainWindowViewModel : ViewModelBase
             {
                 desktop.MainWindow = new AddProjectWindow()
                 {
-                    DataContext = new AddProjectViewModel(this.user, mainWindow)
+                    DataContext = new AddProjectViewModel(this.user, UserProjects)
                 };
 
                 desktop.MainWindow.Show();
@@ -112,16 +108,8 @@ public class MainWindowViewModel : ViewModelBase
                 desktop.MainWindow.Show();
             }
         });
-
-        ViewProjectCommand = ReactiveCommand.Create((Project project) =>
-        {
-            Console.WriteLine(project.GetID());
-        });
+        
         
     }
-
-    private void ViewProject(Project project)
-    {
-        Console.WriteLine(project.GetID());
-    }
+    
 }
